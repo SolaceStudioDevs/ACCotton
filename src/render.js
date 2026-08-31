@@ -38,7 +38,10 @@ function tile(n) {
   const size = n.titleSize ? ` style="font-size:${n.titleSize}px"` : "";
   return `<a class="tile ${variant}" href="${C.routes[n.key]}" data-nav="${n.key}"` +
          ` style="left:${n.x}px;top:${n.y}px;--tile-w:${n.w}px">` +
-         `<span class="tile__kicker">${esc(n.kicker)}</span>` +
+         `<span class="tile__kicker">` +
+           `<span class="tile__num">${esc(n.num)}</span>` +
+           (n.note ? `<span class="tile__note">${esc(n.note)}</span>` : "") +
+         `</span>` +
          `<span class="tile__title"${size}>${esc(n.title)}</span>` +
          `<span class="tile__desc">${esc(n.desc)}</span></a>`;
 }

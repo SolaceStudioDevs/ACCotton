@@ -80,14 +80,21 @@ export const meta = {
 
 /* --- Hub -----------------------------------------------------------------
    Coordinates are in the stage's fixed 1080x480 space; each tile is centred
-   on its point. Spokes and end dots are derived from these at build time. */
+   on its point, so array order does not affect the desktop wheel at all.
+   Array order IS the mobile order, though, and it drives tab order on both:
+   reels first and contact last, matching the brief's priority of getting a
+   visitor listening before asking them to book.
+
+   `num` is the wheel's index label. It follows the desktop layout (01-03 down
+   the left column, 04-06 down the right), so it is deliberately out of
+   sequence here and is hidden on mobile rather than shown out of order. */
 export const nodes = [
-  { key: "about",   x: 221, y: 125, w: 216, variant: "steel", kicker: "01", title: "About",             desc: "The voice, the range, the room" },
-  { key: "reels",   x: 150, y: 245, w: 250, variant: "paper", kicker: "02 — Start here", title: "Demo Reels", desc: "Five long-form narrations", titleSize: 34 },
-  { key: "credits", x: 221, y: 366, w: 216, variant: "steel", kicker: "03", title: "Credits",           desc: "Books and games on the record" },
-  { key: "rates",   x: 860, y: 125, w: 216, variant: "steel", kicker: "04", title: "Rates",             desc: "What a session costs" },
-  { key: "contact", x: 930, y: 245, w: 250, variant: "paper", kicker: "05", title: "Contact & Booking", desc: "Brief me, or find me on ACX", titleSize: 30 },
-  { key: "updates", x: 860, y: 366, w: 216, variant: "steel", kicker: "06", title: "Updates",           desc: "New bookings and releases" },
+  { key: "reels",   x: 150, y: 245, w: 250, variant: "paper", num: "02", note: "Start here", title: "Demo Reels", desc: "Five long-form narrations", titleSize: 34 },
+  { key: "about",   x: 221, y: 125, w: 216, variant: "steel", num: "01", title: "About",             desc: "The voice, the range, the room" },
+  { key: "credits", x: 221, y: 366, w: 216, variant: "steel", num: "03", title: "Credits",           desc: "Books and games on the record" },
+  { key: "rates",   x: 860, y: 125, w: 216, variant: "steel", num: "04", title: "Rates",             desc: "What a session costs" },
+  { key: "updates", x: 860, y: 366, w: 216, variant: "steel", num: "06", title: "Updates",           desc: "New bookings and releases" },
+  { key: "contact", x: 930, y: 245, w: 250, variant: "paper", num: "05", title: "Contact & Booking", desc: "Brief me, or find me on ACX", titleSize: 30 },
 ];
 
 export const stage = { w: 1080, h: 480, cx: 540, cy: 245 };
