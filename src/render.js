@@ -356,7 +356,7 @@ ${posts}
 
 const SECTIONS = { about, reels, credits, rates, contact, updates };
 
-export function page(key, peaks) {
+export function page(key, peaks, assets) {
   const m = C.meta[key];
   const isHub = key === "hub";
   const inner = isHub ? hub()
@@ -402,9 +402,9 @@ export function page(key, peaks) {
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/barlowcondensed-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/styles.css">${ld}
+<link rel="stylesheet" href="${assets.css}">${ld}
 <script>document.documentElement.dataset.js="on"</script>
-<script src="/assets/app.js" type="module"></script>
+<script src="${assets.js}" type="module"></script>
 </head>
 <body data-view="${key}">
 <a class="skip-link" href="#main">Skip to content</a>

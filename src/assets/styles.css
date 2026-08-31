@@ -994,6 +994,11 @@ a { color: inherit; }
     pointer-events: auto;
     touch-action: none;          /* we own the gesture; no scroll/zoom fight */
     -webkit-tap-highlight-color: transparent;
+    /* Without this iOS reads the press as a long-press on the photo and
+       offers Save Image / Copy over the top of the menu. */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
     animation: none;
     transition: transform .22s var(--ease-wipe), box-shadow .22s var(--ease-wipe);
   }
@@ -1002,6 +1007,15 @@ a { color: inherit; }
     box-shadow: 0 0 0 6px var(--color-accent-900),
                 0 0 0 9px var(--color-accent-300),
                 0 24px 60px rgba(0, 0, 0, .45);
+  }
+
+  /* The button owns the gesture; the image must not be a drag or
+     long-press target of its own. */
+  .hub__medallion img {
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   [data-js] .hub__hint { display: block; }
