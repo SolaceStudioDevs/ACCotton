@@ -14,6 +14,22 @@
     "command": "node build.js"
   },
 
+  // Deploys build a new version from this file, so anything added by hand in
+  // the dashboard can be absent from the next build. Non-secret settings
+  // belong here where every deploy will carry them.
+  //
+  // BRIEF_TO is the address already published on the contact page, which
+  // forwards to A.C.'s inbox — deliberately not a personal address, so this
+  // file stays safe to read.
+  "vars": {
+    "BRIEF_FROM": "briefs@send.accotton.com",
+    "BRIEF_TO": "narration@accotton.com"
+  },
+
+  // RESEND_API_KEY is a secret and is set in the dashboard
+  // (Settings -> Runtime variables and secrets, type Secret). It must never
+  // appear in this file.
+
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

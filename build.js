@@ -10,6 +10,7 @@
    ========================================================================== */
 
 import { readFile, writeFile, mkdir, rm, cp, readdir, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -41,10 +42,12 @@ async function build() {
     await readFile(path.join(ROOT, "public/data/waveforms.json"), "utf8")
   );
 
+  const assets = await buildAssets();
+
   // One file per route. "/" is dist/index.html; "/about/" is
   // dist/about/index.html, which Cloudflare Pages serves at the clean URL.
   for (const [key, route] of Object.entries(routes)) {
-    const html = page(key, peaks);
+    const html = page(key, peaks, assets);
     const out = route === "/"
       ? path.join(DIST, "index.html")
       : path.join(DIST, route.replace(/^\/|\/$/g, ""), "index.html");
@@ -54,12 +57,11 @@ async function build() {
   }
 
   // 404 reuses the hub shell but must not be indexed.
-  const notFound = page("hub", peaks)
+  const notFound = page("hub", peaks, assets)
     .replace("<title>", '<meta name="robots" content="noindex">\n<title>');
   await writeFile(path.join(DIST, "404.html"), notFound);
 
   await cp(path.join(ROOT, "public"), DIST, { recursive: true });
-  await cp(path.join(ROOT, "src/assets"), path.join(DIST, "assets"), { recursive: true });
 
   // waveforms.json is inlined into the reels page; no need to ship it twice.
   await rm(path.join(DIST, "data"), { recursive: true, force: true });
@@ -67,6 +69,37 @@ async function build() {
   await writeFile(path.join(DIST, "sitemap.xml"), sitemap());
 
   console.log(`\n  dist: ${kb(await dirSize(DIST))} in ${Date.now() - started}ms`);
+}
+
+const digest = (content) =>
+  createHash("sha256").update(content).digest("hex").slice(0, 8);
+
+/* Content-hashed asset filenames. Without them a browser holds the previous
+   stylesheet and script until its cache expires, so a fix can be deployed
+   and still not be what the visitor is running. */
+async function buildAssets() {
+  const src = path.join(ROOT, "src/assets");
+  const out = path.join(DIST, "assets");
+  await mkdir(out, { recursive: true });
+
+  const fonts = await readFile(path.join(src, "fonts.css"), "utf8");
+  const fontsName = `fonts.${digest(fonts)}.css`;
+  await writeFile(path.join(out, fontsName), fonts);
+
+  // Point the stylesheet at the hashed font file before hashing it, so a
+  // font change cascades into a new stylesheet name too.
+  let styles = await readFile(path.join(src, "styles.css"), "utf8");
+  styles = styles.replace('@import "/assets/fonts.css";',
+                          `@import "/assets/${fontsName}";`);
+  const stylesName = `styles.${digest(styles)}.css`;
+  await writeFile(path.join(out, stylesName), styles);
+
+  const app = await readFile(path.join(src, "app.js"), "utf8");
+  const appName = `app.${digest(app)}.js`;
+  await writeFile(path.join(out, appName), app);
+
+  console.log(`  assets      → ${stylesName}, ${appName}`);
+  return { css: `/assets/${stylesName}`, js: `/assets/${appName}` };
 }
 
 function sitemap() {
