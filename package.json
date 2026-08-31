@@ -1,0 +1,19 @@
+{
+  "name": "accotton",
+  "version": "1.0.0",
+  "private": true,
+  "description": "accotton.com — voice acting portfolio for A.C. Cotton",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node build.js --serve",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.127.1"
+  }
+}
