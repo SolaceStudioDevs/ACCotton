@@ -1,0 +1,31 @@
+{
+  // Cloudflare Workers configuration.
+  //
+  // The site is static HTML built into dist/ and served by Workers Static
+  // Assets. The Worker itself exists only to handle the contact form POST;
+  // everything else is served straight from the asset store.
+  "name": "accotton",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-08-01",
+
+  "build": {
+    // Runs before deploy so dist/ exists. Kept here rather than only in the
+    // dashboard so a deploy is reproducible from the repo.
+    "command": "node build.js"
+  },
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // dist/404.html, with a real 404 status.
+    "not_found_handling": "404-page",
+    // Without this the asset router answers /api/* before the Worker is
+    // reached, and the contact form would get the 404 page instead of the
+    // handler.
+    "run_worker_first": ["/api/*"]
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

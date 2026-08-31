@@ -1,7 +1,7 @@
 /* ==========================================================================
-   POST /api/brief — contact form handler (Cloudflare Pages Function)
+   POST /api/brief — contact form handler
 
-   Configure in the Pages project (Settings → Environment variables):
+   Configure in the Worker (Settings → Variables and Secrets):
 
      RESEND_API_KEY   required, from https://resend.com/api-keys
      BRIEF_TO         where briefs are delivered   (default narration@accotton.com)
@@ -23,7 +23,7 @@ const json = (status, body) =>
 
 const clean = (v, cap) => String(v ?? "").trim().slice(0, cap);
 
-export async function onRequestPost({ request, env }) {
+export async function handleBrief(request, env) {
   let form;
   try {
     form = await request.formData();
@@ -94,9 +94,3 @@ export async function onRequestPost({ request, env }) {
 
   return json(200, { ok: true });
 }
-
-/* Anything other than POST on this path. */
-export const onRequest = ({ request }) =>
-  request.method === "POST"
-    ? undefined
-    : new Response("Method Not Allowed", { status: 405, headers: { Allow: "POST" } });

@@ -6,8 +6,8 @@ A wheel-and-spoke portfolio: visitors land on a dark hub with the headshot as
 a medallion and six section tiles orbiting it on drawn spokes. Choosing a tile
 fires a waveform wipe and reveals that section.
 
-Built from the `design_handoff_accotton_wheel` package. Static output, no
-runtime dependencies, deployed on Cloudflare Pages.
+Built from the `design_handoff_accotton_wheel` package. Static output,
+deployed on Cloudflare Workers with static assets.
 
 ## Running it
 
@@ -16,8 +16,14 @@ node build.js            # build into dist/
 node build.js --serve    # build, then serve dist/ on http://localhost:8000
 ```
 
-Node 18+. There is nothing to install — the build script uses only the standard
-library.
+Node 18+. The build script uses only the standard library; `wrangler` is the
+one dev dependency and is only needed to run or deploy the Worker:
+
+```sh
+npm install
+npx wrangler dev      # serve dist/ through the real Worker on :8787
+npx wrangler deploy   # build and deploy
+```
 
 ## Layout
 
@@ -28,7 +34,9 @@ src/render.js            HTML renderers for the hub and the six sections
 src/assets/styles.css    Design tokens + every component style
 src/assets/fonts.css     Self-hosted Barlow @font-face rules
 src/assets/app.js        Wipe router, reel players, form validation
-functions/api/brief.js   Contact form handler (Cloudflare Pages Function)
+src/worker.js            Worker entry — routes /api/brief, else static assets
+src/api/brief.js         Contact form handler
+wrangler.jsonc           Cloudflare Workers config (build command, assets)
 public/                  Copied verbatim into dist/ (media, images, fonts, headers)
 tools/generate-peaks.py  Decodes the reels into waveform peak data
 tools/fetch-fonts.py     Re-downloads the self-hosted font subsets
@@ -74,21 +82,28 @@ Every colour, space and shadow resolves to a custom property in the `:root`
 block at the top of `src/assets/styles.css`. That block is the Industry design
 system's token set; component rules below it reference the tokens only.
 
-## Deploying to Cloudflare Pages
+## Deploying
 
-| Setting | Value |
-| --- | --- |
-| Build command | `node build.js` |
-| Build output directory | `dist` |
-| Node version | 18 or newer |
+The Cloudflare project (`accotton`) is a **Worker**, not a Pages project.
+Everything it needs is in `wrangler.jsonc`:
 
-`public/_headers` and `public/_redirects` are copied into `dist/` and picked up
-automatically. `functions/` is detected by Pages without configuration.
+- `build.command` runs `node build.js`, so `dist/` exists before deploy
+- `assets.directory` points at `dist/`
+- `assets.not_found_handling` serves `dist/404.html` with a real 404
+- `assets.run_worker_first` routes `/api/*` to the Worker; without it the
+  asset router would answer the contact form with the 404 page
+
+`public/_headers` and `public/_redirects` are copied into `dist/` and applied
+by the asset store.
+
+Pushes to the connected branch build and deploy automatically. To deploy by
+hand: `npx wrangler deploy`.
 
 ### Contact form
 
-`functions/api/brief.js` validates the brief and emails it via
-[Resend](https://resend.com). Set these in Settings → Environment variables:
+`src/api/brief.js` validates the brief and emails it via
+[Resend](https://resend.com). Set these under Settings → Variables and Secrets
+(`RESEND_API_KEY` as a secret):
 
 | Variable | Required | Default |
 | --- | --- | --- |
@@ -100,8 +115,8 @@ Until `RESEND_API_KEY` is set the endpoint returns 501 and the form tells the
 visitor to email directly, so a message is never silently dropped. The form
 also carries a hidden honeypot field for spam.
 
-Pages Functions do not run under `node build.js --serve`; use `wrangler pages
-dev dist` to exercise the endpoint locally.
+`node build.js --serve` serves the static files only. To exercise the
+endpoint, run `npx wrangler dev` — that boots the real Worker.
 
 ## Outstanding
 
@@ -112,5 +127,21 @@ dev dist` to exercise the endpoint locally.
 - **Update posts have no dates.** `src/content.js` supports a `date` field per
   post and renders it above the heading; nothing shows until one is set.
 - Add legacy URLs from the previous site to `public/_redirects`.
+- **Confirm range requests work on the deployed reels.** Under `wrangler dev`
+  the local asset server answers `Range:` with a `200` and the whole file, and
+  click-to-scrub does not move the playhead as a result. Cloudflare's edge is
+  expected to return `206` in production, but this has not been verified
+  against a real deployment. Check it once the site is live:
+
+  ```sh
+  curl -sI -H "Range: bytes=0-99" https://accotton.com/media/loup-garou.mp3 | head -3
+  # want: HTTP/2 206  +  content-range: bytes 0-99/11292128
+  ```
+
+  If it returns `200`, add `/media/*` to `assets.run_worker_first` and handle
+  `Range` in `src/worker.js` — everything else stays as it is.
+- The reels are 192kbps stereo (41MB total). Re-encoding the spoken-word
+  tracks to mono ~96kbps would cut that roughly fourfold with no audible
+  loss — worth doing when an encoder is to hand.
 - `assets/*` is not fingerprinted, so it's cached for an hour rather than
   immutably. Worth hashing the filenames if the CSS starts changing often.
