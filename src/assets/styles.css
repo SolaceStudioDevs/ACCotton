@@ -252,6 +252,7 @@ a { color: inherit; }
   transition: background .18s, transform .18s;
 }
 .tile__kicker { font-size: 10px; letter-spacing: .2em; }
+.tile__num + .tile__note::before { content: " — "; }
 .tile__title  { font-family: var(--font-heading); font-weight: 600; }
 .tile__desc   { font-size: 12px; line-height: 1.4; }
 
@@ -979,6 +980,11 @@ a { color: inherit; }
      applies once the tiles are in normal flow. */
   .tile--steel:hover, .tile--steel:focus-visible,
   .tile--paper:hover, .tile--paper:focus-visible { transform: none; }
+  .tile__num { display: none; }
+  .tile__num + .tile__note::before { content: none; }
+  /* A kicker with nothing but the hidden number would leave a blank line. */
+  .tile__kicker:not(:has(.tile__note)) { display: none; }
+
   .tile--steel { padding: var(--space-4) var(--space-6); }
   .tile--paper { padding: var(--space-6); }
   .tile--paper .tile__title { font-size: 28px; }
