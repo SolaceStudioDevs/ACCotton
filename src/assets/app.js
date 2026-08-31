@@ -408,17 +408,31 @@ function initForm(scope) {
       body: new FormData(form),
       headers: { Accept: "application/json" },
     })
-      .then((res) => {
-        if (!res.ok) throw new Error(String(res.status));
+      .then(async (res) => {
+        if (!res.ok) {
+          let detail = "";
+          try {
+            const body = await res.json();
+            detail = body.error || "";
+          } catch { /* not JSON */ }
+          throw new Error(detail || `The server returned ${res.status}.`);
+        }
         form.innerHTML =
           '<div class="brief__done"><h3>Brief received.</h3>' +
           "<p>Thanks — I'll come back to you shortly.</p></div>";
       })
-      .catch(() => {
+      .catch((err) => {
         submit.disabled = false;
-        status.innerHTML =
-          'Something went wrong. Please email ' +
-          '<a href="mailto:narration@accotton.com">narration@accotton.com</a> directly.';
+        // Say what actually failed rather than "something went wrong"; the
+        // mailto stays as the way out either way.
+        const said = document.createElement("span");
+        said.textContent = err && err.message ? err.message : "Something went wrong.";
+        status.textContent = "";
+        status.append(said, " Please email ");
+        const link = document.createElement("a");
+        link.href = "mailto:narration@accotton.com";
+        link.textContent = "narration@accotton.com";
+        status.append(link, " directly.");
       });
   });
 }

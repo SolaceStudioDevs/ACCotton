@@ -87,9 +87,20 @@ export async function handleBrief(request, env) {
   });
 
   if (!res.ok) {
-    // Surface nothing from the provider to the client, but keep it in the logs.
-    console.error("resend failed", res.status, await res.text());
-    return json(502, { error: "Could not send the brief." });
+    // Pass the provider's own reason back. It names the actual problem — an
+    // unverified domain, a rejected key, a from-address that is not allowed —
+    // and none of it is sensitive, so swallowing it only makes the form
+    // impossible to debug without dashboard access.
+    let reason = "";
+    try {
+      const detail = await res.json();
+      reason = detail.message || detail.error || detail.name || "";
+    } catch { /* provider did not return JSON */ }
+    console.error("resend failed", res.status, reason);
+    return json(502, {
+      error: `Mail provider rejected the message (${res.status})` +
+             `${reason ? ": " + reason : ""}.`,
+    });
   }
 
   return json(200, { ok: true });
