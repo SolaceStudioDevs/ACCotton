@@ -7,6 +7,7 @@
    ========================================================================== */
 
 import { handleBrief } from "./api/brief.js";
+import { serveMedia } from "./media.js";
 
 export default {
   async fetch(request, env) {
@@ -22,8 +23,12 @@ export default {
       return handleBrief(request, env);
     }
 
-    // Not an API route — hand back to static assets, which applies
-    // not_found_handling (dist/404.html) when nothing matches.
+    if (pathname.startsWith("/media/")) {
+      return serveMedia(request, env);
+    }
+
+    // Hand back to static assets, which applies not_found_handling
+    // (dist/404.html) when nothing matches.
     return env.ASSETS.fetch(request);
   },
 };

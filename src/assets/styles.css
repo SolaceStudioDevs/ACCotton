@@ -183,6 +183,9 @@ a { color: inherit; }
   left: 0; top: 0;
   pointer-events: none;
 }
+
+/* Mobile-only radial spokes; the desktop wheel uses the SVG above. */
+.hub__mspokes { display: none; }
 .hub__spoke  { stroke: var(--color-accent-700); stroke-width: 2; stroke-linecap: round; }
 .hub__dot    { fill: var(--color-accent-600); r: 4; }
 .hub__spoke, .hub__dot { transition: stroke .18s, fill .18s, stroke-width .18s, r .18s; }
@@ -215,6 +218,9 @@ a { color: inherit; }
 }
 .hub__medallion {
   width: 300px; height: 300px;
+  padding: 0;
+  border: 0;
+  background: none;
   overflow: hidden;
   box-shadow: 0 0 0 6px var(--color-accent-900),
               0 0 0 8px var(--color-accent-500),
@@ -222,6 +228,9 @@ a { color: inherit; }
   animation: rise .7s cubic-bezier(.2, .8, .3, 1) both;
 }
 .hub__medallion img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Shown only by the mobile radial menu. */
+.hub__hint { display: none; }
 
 @keyframes spin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
@@ -240,6 +249,8 @@ a { color: inherit; }
 
 .tile {
   position: absolute;
+  left: var(--x);
+  top: var(--y);
   width: var(--tile-w);
   transform: translate(-50%, -50%);
   display: flex;
@@ -281,7 +292,7 @@ a { color: inherit; }
   box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
 }
 .tile--paper .tile__kicker { color: var(--color-accent-700); }
-.tile--paper .tile__title  { line-height: .98; letter-spacing: -.015em; }
+.tile--paper .tile__title  { font-size: var(--title-size, 30px); line-height: .98; letter-spacing: -.015em; }
 .tile--paper .tile__desc   { color: var(--color-neutral-700); }
 .tile--paper:hover, .tile--paper:focus-visible {
   background: #fff;
@@ -935,61 +946,185 @@ a { color: inherit; }
 }
 
 /* ---- The wheel below ~700px --------------------------------------------
-   The wheel has no signed-off mobile design. This is the direction named in
-   the handoff: the same six tiles as a full-width vertical index, with the
-   medallion promoted to a header element and the wipe transition kept.
-   The spokes, orbit and aura are geometry of the wheel itself, so they are
-   dropped rather than shrunk. */
+   Portrait phones get a press-and-hold radial menu instead of the wheel.
+   Only the medallion shows at rest; pressing it fans the six tiles out
+   around it, dragging picks the one nearest your finger's bearing, and
+   releasing opens it.
+
+   Tiles keep their absolute positioning, but placed from a unit vector
+   (--fx/--fy, emitted per tile at build time) times the ellipse radii
+   below, rather than from the desktop wheel's fixed coordinates. */
 @media (max-width: 700px) {
-  .hub { padding: var(--space-4) var(--space-4) var(--space-8); overflow: visible; }
-  .hub__name { font-size: 40px; }
+  .hub {
+    padding: var(--space-6) var(--space-4) var(--space-8);
+    overflow: hidden;
+    --mrx: clamp(96px, 29vw, 124px);
+    --mry: clamp(124px, 19vh, 162px);
+  }
+  .hub__name { font-size: 38px; }
   .hub__role { font-size: 10px; letter-spacing: .24em; }
 
-  .hub__stagewrap { display: block; overflow: visible; margin-top: var(--space-6); }
+  .hub__stagewrap { display: grid; place-items: center; overflow: visible; }
   .hub__stage {
-    position: static;
-    width: auto;
-    height: auto;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: calc(var(--mry) * 2 + 120px);
     transform: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
   }
 
-  .hub__spokes, .hub__orbit, .hub__aura { display: none; }
+  /* The desktop wheel's geometry does not survive the reflow. */
+  .hub__spokes, .hub__orbit { display: none; }
+
+  .hub__aura {
+    left: 50%; top: 50%;
+    width: calc(var(--mrx) * 3.4);
+    height: calc(var(--mrx) * 3.4);
+  }
+
+  /* --- Trigger ---------------------------------------------------------- */
 
   .hub__medallion {
-    position: static;
-    order: -1;
-    transform: none;
-    width: 132px;
-    height: 132px;
-    margin: 0 auto var(--space-4);
+    left: 50%; top: 50%;
+    width: 124px; height: 124px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    pointer-events: auto;
+    touch-action: none;          /* we own the gesture; no scroll/zoom fight */
+    -webkit-tap-highlight-color: transparent;
     animation: none;
-    box-shadow: 0 0 0 4px var(--color-accent-900),
-                0 0 0 6px var(--color-accent-500),
-                0 12px 30px rgba(0, 0, 0, .45);
+    transition: transform .22s var(--ease-wipe), box-shadow .22s var(--ease-wipe);
   }
+  .hub__medallion:active { transform: translate(-50%, -50%) scale(.96); }
+  .hub__stage[data-open="true"] .hub__medallion {
+    box-shadow: 0 0 0 6px var(--color-accent-900),
+                0 0 0 9px var(--color-accent-300),
+                0 24px 60px rgba(0, 0, 0, .45);
+  }
+
+  [data-js] .hub__hint { display: block; }
+  .hub__hint {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 82px);
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--color-accent-400);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .hub__stage[data-open="true"] .hub__hint { opacity: 0; }
+
+  /* --- Spokes ----------------------------------------------------------- */
+
+  .hub__mspokes { display: block; }
+  .hub__mspokes i {
+    position: absolute;
+    left: 50%; top: 50%;
+    height: 2px;
+    width: var(--mry);
+    background: var(--color-accent-700);
+    border-radius: 2px;
+    transform-origin: 0 50%;
+    transform: rotate(var(--ang));
+    opacity: .9;
+    transition: transform .26s var(--ease-wipe), opacity .2s ease, background .16s;
+  }
+  [data-js] .hub__mspokes i { transform: rotate(var(--ang)) scaleX(0); opacity: 0; }
+  .hub__stage[data-open="true"] .hub__mspokes i {
+    transform: rotate(var(--ang)) scaleX(1);
+    opacity: .9;
+  }
+  .hub__mspokes i.is-hot { background: var(--color-accent-300); height: 3px; }
+
+  /* --- Tiles ------------------------------------------------------------ */
 
   .tile {
-    position: static;
-    width: auto;
-    transform: none;
+    position: absolute;
+    left: calc(50% + var(--fx) * var(--mrx));
+    top: calc(50% + var(--fy) * var(--mry));
+    width: 112px;
+    min-height: 50px;
+    gap: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) 6px;
+    border-radius: 14px;
+    transform: translate(-50%, -50%);
+    transition: transform .28s var(--ease-wipe), opacity .2s ease,
+                background .16s, visibility .28s;
   }
-  /* Hover transforms include the centring translate, which no longer
-     applies once the tiles are in normal flow. */
-  .tile--steel:hover, .tile--steel:focus-visible,
-  .tile--paper:hover, .tile--paper:focus-visible { transform: none; }
+  /* Closed: tucked back toward the medallion and invisible. */
+  [data-js] .tile {
+    transform: translate(-50%, -50%)
+               translate(calc(var(--fx) * -54px), calc(var(--fy) * -54px))
+               scale(.6);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .hub__stage[data-open="true"] .tile {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+  /* Latched open, the tiles are ordinary tappable links. */
+  .hub__stage[data-open="true"][data-latched="true"] .tile { pointer-events: auto; }
+
+  /* Fan out rather than appearing all at once. */
+  .hub__stage[data-open="true"] .tile:nth-child(2) { transition-delay: .00s; }
+  .hub__stage[data-open="true"] .tile:nth-child(3) { transition-delay: .03s; }
+  .hub__stage[data-open="true"] .tile:nth-child(4) { transition-delay: .06s; }
+  .hub__stage[data-open="true"] .tile:nth-child(5) { transition-delay: .09s; }
+  .hub__stage[data-open="true"] .tile:nth-child(6) { transition-delay: .12s; }
+  .hub__stage[data-open="true"] .tile:nth-child(7) { transition-delay: .15s; }
+
+  .tile__desc { display: none; }
   .tile__num { display: none; }
   .tile__num + .tile__note::before { content: none; }
-  /* A kicker with nothing but the hidden number would leave a blank line. */
   .tile__kicker:not(:has(.tile__note)) { display: none; }
+  /* Hidden here too: an extra line on one tile would break the ring's
+     even rhythm, and Demo Reels already reads as primary in white. */
+  .tile__kicker { display: none; }
 
-  .tile--steel { padding: var(--space-4) var(--space-6); }
-  .tile--paper { padding: var(--space-6); }
-  .tile--paper .tile__title { font-size: 28px; }
+  .tile--steel .tile__title,
+  .tile--paper .tile__title {
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+  .tile--steel, .tile--paper { box-shadow: 0 8px 22px rgba(0, 0, 0, .38); }
 
-  .hub__tagline { margin-top: var(--space-6); letter-spacing: .12em; }
+  /* Selection under the finger — the same step the desktop wheel uses. */
+  .tile.is-hot { z-index: 2; }
+  .hub__stage[data-open="true"] .tile.is-hot {
+    transform: translate(-50%, -50%) scale(1.16);
+  }
+  .tile--steel.is-hot {
+    background: var(--color-accent-600);
+    box-shadow: 0 0 0 3px var(--color-accent-300), 0 10px 26px rgba(0, 0, 0, .42);
+  }
+  .tile--paper.is-hot {
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--color-accent-300), 0 10px 26px rgba(0, 0, 0, .42);
+  }
+
+  /* Hover transforms from the desktop wheel would fight the states above. */
+  .tile--steel:hover, .tile--steel:focus-visible,
+  .tile--paper:hover, .tile--paper:focus-visible { transform: translate(-50%, -50%); }
+
+  .hub__tagline {
+    margin-top: var(--space-6);
+    font-size: 9px;
+    letter-spacing: .08em;
+  }
 }
 
 @media (max-width: 620px) {
