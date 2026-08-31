@@ -220,23 +220,23 @@ export const contact = {
 };
 
 /* --- Updates -------------------------------------------------------------
-   TODO(content): no dates supplied yet. `date` is rendered above the heading
-   when present; add e.g. date: "March 2026" to each post once confirmed. */
+   Knight's Path is pinned to the top as the featured post, per A.C.; the
+   audiobooks below it run newest first. Add new posts directly under it. */
 export const updates = {
   heading: "Updates.",
   lede: "Short posts when a book wraps, a role is booked, or the studio changes.",
   posts: [
-    { tone: "dark", medium: "Video game", status: "In production", trailer: true,
+    { tone: "dark", medium: "Video game", status: "In production", trailer: true, date: "August 6, 2026",
       title: "Voicing NPCs for <em>Knight's Path</em>",
       body: "Guards, villagers, and a few people who would really rather you left their tavern. Dialect work across the whole cast, and the first trailer is now up." },
-    { tone: "steel", medium: "Audiobook", status: "In production",
+    { tone: "steel", medium: "Audiobook", status: "In production", date: "August 18, 2026",
       title: "Narrating <em>Loup-Garou</em>",
       body: "Kevin Schumacher's werewolf folklore, full length. It is the longest stretch of sustained atmosphere I have recorded and easily the most fun to sit inside." },
-    { tone: "steel", medium: "Audiobook", status: "In production",
-      title: "Narrating <em>The Book of Wisdom</em>",
-      body: "Elias Thorne's esoteric non-fiction on Hermetic principles. A completely different gear from the folklore: slow, deliberate, and entirely unbothered by the clock." },
-    { tone: "steel", medium: "Audiobook", status: "In production",
+    { tone: "steel", medium: "Audiobook", status: "In production", date: "August 16, 2026",
       title: "Narrating <em>I Wasn't Me Until I Left Everything Behind</em>",
       body: "Christin Niebanck's memoir. Reading someone's own life back to them needs a lighter touch than fiction, and it has been a good reminder to stay out of the way of the story." },
+    { tone: "steel", medium: "Audiobook", status: "In production", date: "August 13, 2026",
+      title: "Narrating <em>The Book of Wisdom</em>",
+      body: "Elias Thorne's esoteric non-fiction on Hermetic principles. A completely different gear from the folklore: slow, deliberate, and entirely unbothered by the clock." },
   ],
 };
