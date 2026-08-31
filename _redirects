@@ -1,7 +1,0 @@
-# Cloudflare Pages — redirects
-# https://developers.cloudflare.com/pages/configuration/redirects/
-#
-# Add one line per legacy URL from the old site so existing links and search
-# results keep working, e.g.:
-#   /demos.html   /#demos   301
-#   /about-me     /#about   301

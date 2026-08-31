@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Legacy URLs from the previous single-page accotton.com. Add a line per old
+# path so existing links and search results land on the right section.
+#   /demos      /reels/     301
+#   /about-me   /about/     301
