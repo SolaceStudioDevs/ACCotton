@@ -33,16 +33,26 @@ function spokesSVG() {
          ` aria-hidden="true" focusable="false">${parts.join("")}</svg>`;
 }
 
+/* Unit vector for the mobile radial menu; CSS multiplies these by the
+   ellipse radii to place each tile. */
+function unit(ang) {
+  const r = (ang * Math.PI) / 180;
+  const round = (v) => Math.round(v * 1000) / 1000;
+  return { fx: round(Math.cos(r)), fy: round(Math.sin(r)) };
+}
+
 function tile(n) {
   const variant = n.variant === "paper" ? "tile--paper" : "tile--steel";
-  const size = n.titleSize ? ` style="font-size:${n.titleSize}px"` : "";
+  const size = n.titleSize ? `--title-size:${n.titleSize}px;` : "";
+  const { fx, fy } = unit(n.ang);
   return `<a class="tile ${variant}" href="${C.routes[n.key]}" data-nav="${n.key}"` +
-         ` style="left:${n.x}px;top:${n.y}px;--tile-w:${n.w}px">` +
+         ` data-ang="${n.ang}"` +
+         ` style="--x:${n.x}px;--y:${n.y}px;--tile-w:${n.w}px;${size}--fx:${fx};--fy:${fy}">` +
          `<span class="tile__kicker">` +
            `<span class="tile__num">${esc(n.num)}</span>` +
            (n.note ? `<span class="tile__note">${esc(n.note)}</span>` : "") +
          `</span>` +
-         `<span class="tile__title"${size}>${esc(n.title)}</span>` +
+         `<span class="tile__title">${esc(n.title)}</span>` +
          `<span class="tile__desc">${esc(n.desc)}</span></a>`;
 }
 
@@ -61,11 +71,20 @@ export function hub() {
     <p class="hub__role">${esc(C.site.role)}</p>
   </header>
   <div class="hub__stagewrap">
-    <nav class="hub__stage" aria-label="Sections">
+    <nav class="hub__stage" id="hub-stage" aria-label="Sections">
       ${spokesSVG()}
+      <div class="hub__mspokes" aria-hidden="true">
+        ${C.nodes.map((n) =>
+          `<i data-node="${n.key}" style="--ang:${n.ang}deg"></i>`).join("\n        ")}
+      </div>
       <div class="hub__aura"></div>
       <div class="hub__orbit"></div>
-      <div class="hub__medallion">${portrait("600", "", C.site.name, "eager")}</div>
+      <button class="hub__medallion" type="button" id="hub-trigger"
+              aria-expanded="false" aria-controls="hub-stage"
+              aria-label="Open the section menu">
+        ${portrait("600", "", C.site.name, "eager")}
+      </button>
+      <p class="hub__hint" aria-hidden="true">Press and hold</p>
       ${C.nodes.map(tile).join("\n      ")}
     </nav>
   </div>

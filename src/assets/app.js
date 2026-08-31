@@ -16,7 +16,7 @@ root.dataset.js = "on";
 
 function initHub(scope) {
   const stage = scope.querySelector(".hub__stage");
-  if (!stage) return;
+  if (!stage) return null;
 
   // Matches the design's fit: reserve 28px horizontally and 128px vertically
   // for the wordmark and tagline, then clamp.
@@ -40,6 +40,147 @@ function initHub(scope) {
     tile.addEventListener("focus", () => paint(key, true));
     tile.addEventListener("blur", () => paint(key, false));
   });
+
+  const stopRadial = initRadial(scope, stage);
+
+  return () => {
+    window.removeEventListener("resize", fit);
+    stopRadial();
+  };
+}
+
+/* --- Mobile radial menu ----------------------------------------------------
+   Press the medallion and the six tiles fan out around it; drag toward one
+   and it highlights; release and it opens. Releasing without a direction
+   latches the menu open so the tiles can simply be tapped, which is also
+   what a plain tap does — the gesture is a shortcut, never the only way in.
+   -------------------------------------------------------------------------- */
+
+const RADIAL_MQ = "(max-width: 700px)";
+const DEAD_ZONE = 46;   // px from centre before a drag counts as a direction
+
+function initRadial(scope, stage) {
+  const trigger = scope.querySelector("#hub-trigger");
+  if (!trigger) return () => {};
+
+  const mq = window.matchMedia(RADIAL_MQ);
+  const tiles = Array.from(stage.querySelectorAll(".tile[data-nav]"));
+  const spokes = Array.from(stage.querySelectorAll(".hub__mspokes i"));
+
+  let selected = null;
+  let dragging = false;
+  let openedFromLatched = false;
+
+  const isLatched = () => stage.dataset.latched === "true";
+
+  const select = (key) => {
+    if (selected === key) return;
+    selected = key;
+    tiles.forEach((t) => t.classList.toggle("is-hot", t.dataset.nav === key));
+    spokes.forEach((sp) => sp.classList.toggle("is-hot", sp.dataset.node === key));
+    // A short tick makes the sector boundary findable without looking.
+    if (key && navigator.vibrate) { try { navigator.vibrate(8); } catch { /* ignore */ } }
+  };
+
+  const setOpen = (open, latched = false) => {
+    stage.dataset.open = String(open);
+    stage.dataset.latched = String(open && latched);
+    trigger.setAttribute("aria-expanded", String(open));
+    trigger.setAttribute("aria-label",
+      open ? "Close the section menu" : "Open the section menu");
+    if (!open) select(null);
+  };
+
+  /* Nearest tile by bearing. Six sectors 60 degrees apart, so past the dead
+     zone the nearest is always within 30 degrees — no direction can miss. */
+  const pick = (clientX, clientY) => {
+    const box = trigger.getBoundingClientRect();
+    const dx = clientX - (box.left + box.width / 2);
+    const dy = clientY - (box.top + box.height / 2);
+    if (Math.hypot(dx, dy) < DEAD_ZONE) return null;
+
+    const bearing = (Math.atan2(dy, dx) * 180) / Math.PI;
+    let best = null;
+    let bestDelta = Infinity;
+    for (const tile of tiles) {
+      const delta = Math.abs(
+        ((Number(tile.dataset.ang) - bearing + 540) % 360) - 180);
+      if (delta < bestDelta) { bestDelta = delta; best = tile.dataset.nav; }
+    }
+    return best;
+  };
+
+  const onDown = (e) => {
+    if (!mq.matches || e.button > 0) return;
+    e.preventDefault();
+    openedFromLatched = isLatched();
+    dragging = true;
+    try { trigger.setPointerCapture(e.pointerId); } catch { /* ignore */ }
+    setOpen(true, false);
+  };
+
+  const onMove = (e) => {
+    if (!dragging) return;
+    select(pick(e.clientX, e.clientY));
+  };
+
+  const onUp = () => {
+    if (!dragging) return;
+    dragging = false;
+    if (selected) {
+      const key = selected;
+      setOpen(false);
+      go(ROUTES[key], LABELS[ROUTES[key]]);
+    } else if (openedFromLatched) {
+      setOpen(false);           // second tap closes it again
+    } else {
+      setOpen(true, true);      // tapped without a direction — leave it open
+    }
+  };
+
+  const onCancel = () => { dragging = false; setOpen(false); };
+
+  const onDocDown = (e) => {
+    if (!isLatched()) return;
+    if (e.target.closest("#hub-trigger") || e.target.closest(".tile")) return;
+    setOpen(false);
+  };
+
+  const onKey = (e) => {
+    if (e.key === "Escape" && stage.dataset.open === "true") {
+      setOpen(false);
+      trigger.focus();
+      return;
+    }
+    if (e.target !== trigger) return;
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    setOpen(!isLatched(), !isLatched());
+  };
+
+  // On desktop the medallion is decoration, so it should not be focusable or
+  // announced as a control.
+  const sync = () => {
+    trigger.disabled = !mq.matches;
+    if (!mq.matches) setOpen(false);
+  };
+  sync();
+  mq.addEventListener("change", sync);
+
+  trigger.addEventListener("pointerdown", onDown);
+  trigger.addEventListener("pointermove", onMove);
+  trigger.addEventListener("pointerup", onUp);
+  trigger.addEventListener("pointercancel", onCancel);
+  document.addEventListener("pointerdown", onDocDown);
+  // Bound on the document only: bound on the trigger as well, a keypress
+  // there would run the toggle twice and land back where it started.
+  document.addEventListener("keydown", onKey);
+
+  return () => {
+    mq.removeEventListener("change", sync);
+    document.removeEventListener("pointerdown", onDocDown);
+    document.removeEventListener("keydown", onKey);
+  };
 }
 
 /* --- Demo reels ------------------------------------------------------------ */
@@ -327,9 +468,9 @@ let navigating = false;
 
 function mount(scope) {
   if (teardown) { teardown(); teardown = null; }
-  initHub(scope);
-  teardown = initReels(scope) || null;
+  const stops = [initHub(scope), initReels(scope)].filter(Boolean);
   initForm(scope);
+  teardown = () => stops.forEach((stop) => stop());
 }
 
 function swap(html, url) {
@@ -395,6 +536,11 @@ const LABELS = {
   "/": "Menu", "/about/": "About", "/reels/": "Demo Reels",
   "/credits/": "Credits", "/rates/": "Rates",
   "/contact/": "Contact", "/updates/": "Updates",
+};
+
+const ROUTES = {
+  hub: "/", about: "/about/", reels: "/reels/", credits: "/credits/",
+  rates: "/rates/", contact: "/contact/", updates: "/updates/",
 };
 
 document.addEventListener("click", (e) => {
