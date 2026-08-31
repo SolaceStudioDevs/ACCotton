@@ -19,10 +19,11 @@
     "binding": "ASSETS",
     // dist/404.html, with a real 404 status.
     "not_found_handling": "404-page",
-    // Without this the asset router answers /api/* before the Worker is
-    // reached, and the contact form would get the 404 page instead of the
-    // handler.
-    "run_worker_first": ["/api/*"]
+    // /api/* — without this the asset router answers before the Worker is
+    // reached and the contact form gets the 404 page instead of the handler.
+    // /media/* — the asset store does not answer Range requests, so the
+    // browser cannot seek within a reel. The Worker adds range support.
+    "run_worker_first": ["/api/*", "/media/*"]
   },
 
   "observability": {
