@@ -73,10 +73,6 @@ export function hub() {
   <div class="hub__stagewrap">
     <nav class="hub__stage" id="hub-stage" aria-label="Sections">
       ${spokesSVG()}
-      <div class="hub__mspokes" aria-hidden="true">
-        ${C.nodes.map((n) =>
-          `<i data-node="${n.key}" style="--ang:${n.ang}deg"></i>`).join("\n        ")}
-      </div>
       <div class="hub__aura"></div>
       <div class="hub__orbit"></div>
       <button class="hub__medallion" type="button" id="hub-trigger"
