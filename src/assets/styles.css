@@ -975,7 +975,6 @@ a { color: inherit; }
     transform: none;
   }
 
-  /* The desktop wheel's geometry does not survive the reflow. */
   /* Radial spokes do not survive the reflow: there is only 9-19px between
      the medallion and the tiles, far too little for a line to read as a
      spoke. The orbit ring does the connecting instead — sized to pass
@@ -996,12 +995,19 @@ a { color: inherit; }
        not as ambient texture. */
     border: 2px solid var(--color-accent-500);
     animation: none;
-    transition: opacity .3s ease;
+    transition: opacity .3s ease .06s,
+                transform .32s var(--ease-wipe);
   }
   /* Hidden with the rest of the menu at rest; without JS the ring, like the
      tiles, simply stands open. */
-  [data-js] .hub__orbit { opacity: 0; }
-  [data-js] .hub__stage[data-open="true"] .hub__orbit { opacity: .75; }
+  [data-js] .hub__orbit {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.62);
+  }
+  [data-js] .hub__stage[data-open="true"] .hub__orbit {
+    opacity: .75;
+    transform: translate(-50%, -50%) scale(1);
+  }
 
   .hub__aura {
     left: 50%; top: 50%;
