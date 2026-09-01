@@ -960,11 +960,11 @@ a { color: inherit; }
        the medallion and stay on screen from 360px up: the radius grows with
        the viewport, and the medallion grows more slowly so the gap between
        them never closes. */
-    --mr: clamp(112px, 32vw, 132px);
-    --med: clamp(96px, 28vw, 116px);
+    --mr: clamp(123px, 35.2vw, 145px);
+    --med: clamp(106px, 30.8vw, 128px);
   }
-  .hub__name { font-size: 38px; }
-  .hub__role { font-size: 10px; letter-spacing: .24em; }
+  .hub__name { font-size: 42px; }
+  .hub__role { font-size: 11px; letter-spacing: .24em; }
 
   .hub__stagewrap { display: grid; place-items: center; overflow: visible; }
   .hub__stage {
@@ -1059,7 +1059,7 @@ a { color: inherit; }
     top: calc(50% + var(--med) / 2 + 16px);
     transform: translateX(-50%);
     margin: 0;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: .22em;
     text-transform: uppercase;
     color: var(--color-accent-400);
@@ -1077,8 +1077,8 @@ a { color: inherit; }
     top: calc(50% + var(--fy) * var(--mr));
     /* Narrow enough that neighbours stay clearly apart at 360px, where 104px
        tiles met edge to edge, and that the ring shows between them. */
-    width: 88px;
-    min-height: 52px;
+    width: 97px;
+    min-height: 57px;
     gap: 0;
     text-align: center;
     align-items: center;
@@ -1124,7 +1124,7 @@ a { color: inherit; }
 
   .tile--steel .tile__title,
   .tile--paper .tile__title {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.15;
     letter-spacing: 0;
   }
@@ -1151,7 +1151,7 @@ a { color: inherit; }
 
   .hub__tagline {
     margin-top: var(--space-6);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: .08em;
   }
 }
