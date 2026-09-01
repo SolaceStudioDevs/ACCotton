@@ -57,7 +57,7 @@ function initHub(scope) {
    -------------------------------------------------------------------------- */
 
 const RADIAL_MQ = "(max-width: 700px)";
-const DEAD_ZONE = 46;   // px from centre before a drag counts as a direction
+const DEAD_ZONE = 50;   // px from centre before a drag counts as a direction
 
 function initRadial(scope, stage) {
   const trigger = scope.querySelector("#hub-trigger");
