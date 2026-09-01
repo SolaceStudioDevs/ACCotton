@@ -184,8 +184,6 @@ a { color: inherit; }
   pointer-events: none;
 }
 
-/* Mobile-only radial spokes; the desktop wheel uses the SVG above. */
-.hub__mspokes { display: none; }
 .hub__spoke  { stroke: var(--color-accent-700); stroke-width: 2; stroke-linecap: round; }
 .hub__dot    { fill: var(--color-accent-600); r: 4; }
 .hub__spoke, .hub__dot { transition: stroke .18s, fill .18s, stroke-width .18s, r .18s; }
@@ -958,8 +956,12 @@ a { color: inherit; }
   .hub {
     padding: var(--space-6) var(--space-4) var(--space-8);
     overflow: hidden;
-    --mrx: clamp(96px, 29vw, 124px);
-    --mry: clamp(124px, 19vh, 162px);
+    /* A single radius makes the ring a true circle. Sized so the tiles clear
+       the medallion and stay on screen from 360px up: the radius grows with
+       the viewport, and the medallion grows more slowly so the gap between
+       them never closes. */
+    --mr: clamp(112px, 32vw, 132px);
+    --med: clamp(96px, 28vw, 116px);
   }
   .hub__name { font-size: 38px; }
   .hub__role { font-size: 10px; letter-spacing: .24em; }
@@ -969,24 +971,29 @@ a { color: inherit; }
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: calc(var(--mry) * 2 + 120px);
+    min-height: calc(var(--mr) * 2 + 120px);
     transform: none;
   }
 
   /* The desktop wheel's geometry does not survive the reflow. */
+  /* The desktop wheel's geometry does not survive the reflow, and at this
+     radius there is only 9-19px between the medallion and the tiles — far
+     too little for a spoke to read as anything but an artefact. The even
+     spacing of the ring carries the structure on its own. */
   .hub__spokes, .hub__orbit { display: none; }
 
   .hub__aura {
     left: 50%; top: 50%;
-    width: calc(var(--mrx) * 3.4);
-    height: calc(var(--mrx) * 3.4);
+    width: calc(var(--mr) * 3.2);
+    height: calc(var(--mr) * 3.2);
   }
 
   /* --- Trigger ---------------------------------------------------------- */
 
   .hub__medallion {
     left: 50%; top: 50%;
-    width: 124px; height: 124px;
+    width: var(--med);
+    height: var(--med);
     padding: 0;
     border: 0;
     background: none;
@@ -1022,7 +1029,7 @@ a { color: inherit; }
   .hub__hint {
     position: absolute;
     left: 50%;
-    top: calc(50% + 82px);
+    top: calc(50% + var(--med) / 2 + 16px);
     transform: translateX(-50%);
     margin: 0;
     font-size: 10px;
@@ -1035,35 +1042,13 @@ a { color: inherit; }
   }
   .hub__stage[data-open="true"] .hub__hint { opacity: 0; }
 
-  /* --- Spokes ----------------------------------------------------------- */
-
-  .hub__mspokes { display: block; }
-  .hub__mspokes i {
-    position: absolute;
-    left: 50%; top: 50%;
-    height: 2px;
-    width: var(--mry);
-    background: var(--color-accent-700);
-    border-radius: 2px;
-    transform-origin: 0 50%;
-    transform: rotate(var(--ang));
-    opacity: .9;
-    transition: transform .26s var(--ease-wipe), opacity .2s ease, background .16s;
-  }
-  [data-js] .hub__mspokes i { transform: rotate(var(--ang)) scaleX(0); opacity: 0; }
-  .hub__stage[data-open="true"] .hub__mspokes i {
-    transform: rotate(var(--ang)) scaleX(1);
-    opacity: .9;
-  }
-  .hub__mspokes i.is-hot { background: var(--color-accent-300); height: 3px; }
-
   /* --- Tiles ------------------------------------------------------------ */
 
   .tile {
     position: absolute;
-    left: calc(50% + var(--fx) * var(--mrx));
-    top: calc(50% + var(--fy) * var(--mry));
-    width: 112px;
+    left: calc(50% + var(--fx) * var(--mr));
+    top: calc(50% + var(--fy) * var(--mr));
+    width: 104px;
     min-height: 50px;
     gap: 0;
     text-align: center;

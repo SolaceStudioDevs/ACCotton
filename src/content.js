@@ -90,16 +90,20 @@ export const meta = {
    sequence here and is hidden on mobile rather than shown out of order.
 
    `ang` is the compass bearing each tile takes on the mobile radial menu,
-   in degrees with 0 = right and increasing clockwise. Six tiles, 60 apart,
-   starting with Demo Reels at the top. The build turns these into the unit
-   vectors the CSS positions from, and app.js matches a drag against them. */
+   in degrees with 0 = right and increasing clockwise. Six tiles, 60 apart.
+   The two paper tiles sit opposite each other on the vertical axis — Demo
+   Reels at the top, Contact at the bottom — so the ring reads as balanced
+   and the two calls to action anchor it, with the four steel tiles on the
+   diagonals. Clockwise from the top: reels, about, credits, contact, rates,
+   updates. The build turns these into the unit vectors the CSS positions
+   from, and app.js matches a drag against them. */
 export const nodes = [
   { key: "reels",   x: 150, y: 245, w: 250, variant: "paper", ang: -90, num: "02", note: "Start here", title: "Demo Reels", desc: "Five long-form narrations", titleSize: 34 },
   { key: "about",   x: 221, y: 125, w: 216, variant: "steel", ang: -30, num: "01", title: "About",             desc: "The voice, the range, the room" },
   { key: "credits", x: 221, y: 366, w: 216, variant: "steel", ang:  30, num: "03", title: "Credits",           desc: "Books and games on the record" },
-  { key: "rates",   x: 860, y: 125, w: 216, variant: "steel", ang:  90, num: "04", title: "Rates",             desc: "What a session costs" },
-  { key: "updates", x: 860, y: 366, w: 216, variant: "steel", ang: 150, num: "06", title: "Updates",           desc: "New bookings and releases" },
-  { key: "contact", x: 930, y: 245, w: 250, variant: "paper", ang: 210, num: "05", title: "Contact & Booking", desc: "Brief me, or find me on ACX", titleSize: 30 },
+  { key: "rates",   x: 860, y: 125, w: 216, variant: "steel", ang: 150, num: "04", title: "Rates",             desc: "What a session costs" },
+  { key: "updates", x: 860, y: 366, w: 216, variant: "steel", ang: 210, num: "06", title: "Updates",           desc: "New bookings and releases" },
+  { key: "contact", x: 930, y: 245, w: 250, variant: "paper", ang:  90, num: "05", title: "Contact & Booking", desc: "Brief me, or find me on ACX", titleSize: 30 },
 ];
 
 export const stage = { w: 1080, h: 480, cx: 540, cy: 245 };

@@ -65,7 +65,6 @@ function initRadial(scope, stage) {
 
   const mq = window.matchMedia(RADIAL_MQ);
   const tiles = Array.from(stage.querySelectorAll(".tile[data-nav]"));
-  const spokes = Array.from(stage.querySelectorAll(".hub__mspokes i"));
 
   let selected = null;
   let dragging = false;
@@ -77,7 +76,6 @@ function initRadial(scope, stage) {
     if (selected === key) return;
     selected = key;
     tiles.forEach((t) => t.classList.toggle("is-hot", t.dataset.nav === key));
-    spokes.forEach((sp) => sp.classList.toggle("is-hot", sp.dataset.node === key));
     // A short tick makes the sector boundary findable without looking.
     if (key && navigator.vibrate) { try { navigator.vibrate(8); } catch { /* ignore */ } }
   };
