@@ -140,7 +140,11 @@ function about() {
         <div class="chipgroups">
       ${groups}
         </div>
-        <div><a class="pill pill--dark" href="${C.routes.reels}" data-nav="reels">${esc(a.cta.label)}</a></div>
+        <div class="about__ctas">
+          <a class="pill pill--dark" href="${C.routes.reels}" data-nav="reels">${esc(a.cta.label)}</a>${a.listen
+            ? `\n          <a class="pill pill--light" href="${esc(a.listen.href)}" target="_blank" rel="noreferrer">${esc(a.listen.label)}</a>`
+            : ""}
+        </div>
       </div>
     </div>`;
 }

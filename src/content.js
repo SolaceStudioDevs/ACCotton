@@ -14,6 +14,12 @@ export const site = {
   email: "narration@accotton.com",
 };
 
+/* Audible product page for the first released title. Canonical form — the
+   session and referral parameters Audible hands out are per-visit and would
+   rot, so they are stripped. Used by both About and Credits. */
+export const AUDIBLE_I_WASNT_ME =
+  "https://www.audible.com/pd/I-Wasnt-Me-Until-I-Left-Everything-Behind-Audiobook/B0HKLHW6VZ";
+
 /* Order drives the prev/next stepper. Stepping off either end returns to
    the hub, labelled "Menu". */
 export const order = ["about", "reels", "credits", "rates", "contact", "updates"];
@@ -115,6 +121,7 @@ export const about = {
   paragraphs: [
     "Grumpy tavern keeper. Small-town sheriff. The villain who is far too pleased with himself. The steady voice on the last thirty seconds of a car ad. I've been told my range is annoyingly wide, and I have decided to take that as a compliment.",
     "Most of the work is long-form: audiobooks, game NPCs, anything where one voice has to hold up over hours instead of seconds. I record at home in a room I have quietly obsessed over, and I send multiple takes every time, because the read in your head is rarely the first one out of my mouth.",
+    "The first of those is out in the world: Christin Niebanck's memoir, I Wasn't Me Until I Left Everything Behind, is on Audible now, with Elias Thorne's The Book of Wisdom in review behind it. I have stopped pretending I do not check the listing every morning.",
   ],
   specs: [
     { label: "Microphone", value: "Shure MV7+",      sub: "USB-C / XLR hybrid dynamic" },
@@ -136,6 +143,7 @@ export const about = {
     },
   ],
   cta: { label: "Hear the reels →", to: "reels" },
+  listen: { label: "Listen on Audible →", href: AUDIBLE_I_WASNT_ME },
 };
 
 /* --- Demo reels ----------------------------------------------------------
@@ -161,12 +169,6 @@ export const reelsIntro = {
 /* --- Credits -------------------------------------------------------------- */
 
 export const TRAILER_URL = "https://youtu.be/qj51LFfawi0?si=ncYceXSEMIHoBTKV";
-
-/* Audible product page for the first released title. Canonical form — the
-   session and referral parameters Audible hands out are per-visit and would
-   rot, so they are stripped. */
-export const AUDIBLE_I_WASNT_ME =
-  "https://www.audible.com/pd/I-Wasnt-Me-Until-I-Left-Everything-Behind-Audiobook/B0HKLHW6VZ";
 
 /* Ordered by how far along each title is: released, then in review, then
    still recording. */

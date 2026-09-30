@@ -423,6 +423,7 @@ a { color: inherit; }
   text-wrap: pretty;
 }
 .about__lede p + p { margin-top: var(--space-3); }
+.about__ctas { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 .about__lede h2 { margin-bottom: var(--space-3); }
 
 .specs {
