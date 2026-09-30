@@ -200,15 +200,20 @@ function credits() {
     const trailer = c.trailer
       ? `\n            <a class="trailer" href="${esc(C.TRAILER_URL)}" target="_blank" rel="noreferrer">Watch the trailer →</a>`
       : "";
+    const listen = c.listen
+      ? `\n            <a class="listen" href="${esc(c.listen)}" target="_blank" rel="noreferrer">Listen on Audible →</a>`
+      : "";
+    // A released title renders its status as a badge rather than plain text.
+    const status = c.live ? "credit__status credit__status--live" : "credit__status";
     return `      <article class="credit credit--${c.tone}">
         <span class="chip credit__medium">${esc(c.medium)}</span>
         <div>
           <div class="credit__titles">
-            <span class="credit__title">${esc(c.role)}${work}</span>${trailer}
+            <span class="credit__title">${esc(c.role)}${work}</span>${trailer}${listen}
           </div>
           <div class="credit__meta">${esc(c.meta)}</div>
         </div>
-        <div class="credit__status">${esc(c.status)}</div>
+        <div class="${status}">${esc(c.status)}</div>
       </article>`;
   }).join("\n");
 
@@ -329,6 +334,9 @@ function updates() {
     const trailer = p.trailer
       ? `\n        <a class="post__trailer" href="${esc(C.TRAILER_URL)}" target="_blank" rel="noreferrer">Watch the trailer →</a>`
       : "";
+    const listen = p.listen
+      ? `\n        <a class="post__listen" href="${esc(p.listen)}" target="_blank" rel="noreferrer">Listen on Audible →</a>`
+      : "";
     // Dates are not supplied yet; the line renders only once `date` is set.
     const date = p.date ? `\n        <div class="post__date">${esc(p.date)}</div>` : "";
     return `      <article class="post post--${p.tone}">
@@ -337,7 +345,7 @@ function updates() {
           <span class="post__status">${esc(p.status)}</span>
         </div>${date}
         <h3 class="post__title">${p.title}</h3>
-        <p class="post__body">${esc(p.body)}</p>${trailer}
+        <p class="post__body">${esc(p.body)}</p>${trailer}${listen}
       </article>`;
   }).join("\n");
 

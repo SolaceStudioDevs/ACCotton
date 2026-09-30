@@ -59,7 +59,7 @@ export const meta = {
   credits: {
     title: "Credits — A.C. Cotton",
     description:
-      "Audiobook narration and video game voice credits, including Knight's Path, Loup-Garou and The Book of Wisdom.",
+      "Audiobook narration and video game voice credits. I Wasn't Me Until I Left Everything Behind is out now on Audible, with The Book of Wisdom, Loup-Garou and Knight's Path to follow.",
   },
   rates: {
     title: "Rates — A.C. Cotton",
@@ -162,17 +162,26 @@ export const reelsIntro = {
 
 export const TRAILER_URL = "https://youtu.be/qj51LFfawi0?si=ncYceXSEMIHoBTKV";
 
+/* Audible product page for the first released title. Canonical form — the
+   session and referral parameters Audible hands out are per-visit and would
+   rot, so they are stripped. */
+export const AUDIBLE_I_WASNT_ME =
+  "https://www.audible.com/pd/I-Wasnt-Me-Until-I-Left-Everything-Behind-Audiobook/B0HKLHW6VZ";
+
+/* Ordered by how far along each title is: released, then in review, then
+   still recording. */
 export const credits = {
   heading: "On the record.",
   items: [
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "I Wasn't Me Until I Left Everything Behind", em: true,
+      listen: AUDIBLE_I_WASNT_ME,
+      meta: "Christin Niebanck · Memoir", status: "Out now", live: true },
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "The Book of Wisdom: The Hidden Order Behind All Things", em: true,
+      meta: "Elias Thorne · Esoteric non-fiction", status: "In ACX review" },
     { medium: "Video game", tone: "dark", role: "NPC voice actor — ", work: "Knight's Path", em: true,
       trailer: true, meta: "Character and dialect work · Medieval historical", status: "In production" },
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou", em: true,
       meta: "Kevin Schumacher · Folklore & horror", status: "In production" },
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "The Book of Wisdom: The Hidden Order Behind All Things", em: true,
-      meta: "Elias Thorne · Esoteric non-fiction", status: "In production" },
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "I Wasn't Me Until I Left Everything Behind", em: true,
-      meta: "Christin Niebanck · Memoir", status: "In production" },
   ],
   footnote: "More credits added as new roles are booked.",
 };
@@ -233,6 +242,10 @@ export const updates = {
     { tone: "dark", medium: "Video game", status: "In production", trailer: true, date: "August 6, 2026",
       title: "Voicing NPCs for <em>Knight's Path</em>",
       body: "Guards, villagers, and a few people who would really rather you left their tavern. Dialect work across the whole cast, and the first trailer is now up." },
+    { tone: "steel", medium: "Audiobook", status: "Out now", date: "September 30, 2026",
+      listen: AUDIBLE_I_WASNT_ME,
+      title: "<em>I Wasn't Me Until I Left Everything Behind</em> is out on Audible",
+      body: "My first published audiobook. Christin Niebanck's memoir is finished, through review, and live on Audible now. The Book of Wisdom is approved by its author and sitting in ACX review behind it, so there should be two before long." },
     { tone: "steel", medium: "Audiobook", status: "In production", date: "August 18, 2026",
       title: "Narrating <em>Loup-Garou</em>",
       body: "Kevin Schumacher's werewolf folklore, full length. It is the longest stretch of sustained atmosphere I have recorded and easily the most fun to sit inside." },
