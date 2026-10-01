@@ -211,13 +211,21 @@ function credits() {
     const status = c.live ? "credit__status credit__status--live" : "credit__status";
     // Cover art where there is a published title to show one for. It sits in
     // the same column as the medium chip so rows without art stay aligned.
-    const cover = c.cover
+    const art = c.cover
       ? `<picture>` +
         `<source srcset="/img/${c.cover}-240.webp" type="image/webp">` +
         `<img class="credit__cover" src="/img/${c.cover}-240.jpg" alt="${esc(c.coverAlt)}"` +
         ` width="120" height="120" loading="lazy" decoding="async">` +
-        `</picture>\n          `
+        `</picture>`
       : "";
+    // The cover is a second route to the same place as the listen pill, so it
+    // carries no accessible name of its own — the img alt already names the
+    // title, and a link label here would just repeat it.
+    const cover = !art
+      ? ""
+      : (c.listen
+          ? `<a class="credit__coverlink" href="${esc(c.listen)}" target="_blank" rel="noreferrer">${art}</a>`
+          : art) + `\n          `;
     return `      <article class="credit credit--${c.tone}">
         <div class="credit__lead">
           ${cover}<span class="chip credit__medium">${esc(c.medium)}</span>

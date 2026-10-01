@@ -609,6 +609,17 @@ a { color: inherit; }
   border-radius: 8px;
   box-shadow: var(--shadow-md);
 }
+.credit__coverlink {
+  display: block;
+  border-radius: 8px;
+  transition: transform .18s, box-shadow .18s;
+}
+.credit__coverlink:hover { transform: translateY(-2px); }
+.credit__coverlink:hover .credit__cover { box-shadow: var(--shadow-lg); }
+.credit__coverlink:focus-visible {
+  outline: 2px solid var(--color-accent-200);
+  outline-offset: 3px;
+}
 .credit__medium { justify-self: start; padding: 5px 14px; font-size: 11px; }
 .credit--dark  .credit__medium { background: var(--color-accent-700); color: var(--color-bg); }
 .credit--steel .credit__medium { background: var(--color-accent-200); color: var(--color-accent-900); }
