@@ -14,11 +14,16 @@ export const site = {
   email: "narration@accotton.com",
 };
 
-/* Audible product page for the first released title. Canonical form — the
-   session and referral parameters Audible hands out are per-visit and would
-   rot, so they are stripped. Used by both About and Credits. */
+/* Audible product pages, in canonical form — the session and referral
+   parameters Audible hands out are per-visit and would rot, so they are
+   stripped. AUDIBLE_NARRATOR is the listing of everything narrated under this
+   name, which is the right link when pointing at the work as a whole. */
 export const AUDIBLE_I_WASNT_ME =
   "https://www.audible.com/pd/I-Wasnt-Me-Until-I-Left-Everything-Behind-Audiobook/B0HKLHW6VZ";
+export const AUDIBLE_BOOK_OF_WISDOM =
+  "https://www.audible.com/pd/B0HLQ62M3X";
+export const AUDIBLE_NARRATOR =
+  "https://www.audible.com/search?searchNarrator=A.C.+Cotton";
 
 /* Order drives the prev/next stepper. Stepping off either end returns to
    the hub, labelled "Menu". */
@@ -65,7 +70,7 @@ export const meta = {
   credits: {
     title: "Credits — A.C. Cotton",
     description:
-      "Audiobook narration and video game voice credits. I Wasn't Me Until I Left Everything Behind is out now on Audible, with The Book of Wisdom, Loup-Garou and Knight's Path to follow.",
+      "Audiobook narration and video game voice credits. I Wasn't Me Until I Left Everything Behind and The Book of Wisdom are out now on Audible, with Loup-Garou and Knight's Path to follow.",
   },
   rates: {
     title: "Rates — A.C. Cotton",
@@ -121,7 +126,7 @@ export const about = {
   paragraphs: [
     "Grumpy tavern keeper. Small-town sheriff. The villain who is far too pleased with himself. The steady voice on the last thirty seconds of a car ad. I've been told my range is annoyingly wide, and I have decided to take that as a compliment.",
     "Most of the work is long-form: audiobooks, game NPCs, anything where one voice has to hold up over hours instead of seconds. I record at home in a room I have quietly obsessed over, and I send multiple takes every time, because the read in your head is rarely the first one out of my mouth.",
-    "The first of those is out in the world: Christin Niebanck's memoir, I Wasn't Me Until I Left Everything Behind, is on Audible now, with Elias Thorne's The Book of Wisdom in review behind it. I have stopped pretending I do not check the listing every morning.",
+    "Two of those are out in the world: Christin Niebanck's memoir, I Wasn't Me Until I Left Everything Behind, and Elias Thorne's The Book of Wisdom. Both are on Audible, nine days apart, and I have stopped pretending I do not check the listings every morning.",
   ],
   specs: [
     { label: "Microphone", value: "Shure MV7+",      sub: "USB-C / XLR hybrid dynamic" },
@@ -143,7 +148,7 @@ export const about = {
     },
   ],
   cta: { label: "Hear the reels →", to: "reels" },
-  listen: { label: "Listen on Audible →", href: AUDIBLE_I_WASNT_ME },
+  listen: { label: "Both titles on Audible →", href: AUDIBLE_NARRATOR },
 };
 
 /* --- Demo reels ----------------------------------------------------------
@@ -170,8 +175,8 @@ export const reelsIntro = {
 
 export const TRAILER_URL = "https://youtu.be/qj51LFfawi0?si=ncYceXSEMIHoBTKV";
 
-/* Ordered by how far along each title is: released, then in review, then
-   still recording. */
+/* Ordered by how far along each title is: released first, then what is still
+   being recorded. */
 export const credits = {
   heading: "On the record.",
   items: [
@@ -179,7 +184,8 @@ export const credits = {
       listen: AUDIBLE_I_WASNT_ME,
       meta: "Christin Niebanck · Memoir", status: "Out now", live: true },
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "The Book of Wisdom: The Hidden Order Behind All Things", em: true,
-      meta: "Elias Thorne · Esoteric non-fiction", status: "In ACX review" },
+      listen: AUDIBLE_BOOK_OF_WISDOM,
+      meta: "Elias Thorne · Esoteric non-fiction", status: "Out now", live: true },
     { medium: "Video game", tone: "dark", role: "NPC voice actor — ", work: "Knight's Path", em: true,
       trailer: true, meta: "Character and dialect work · Medieval historical", status: "In production" },
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou", em: true,
@@ -244,6 +250,10 @@ export const updates = {
     { tone: "dark", medium: "Video game", status: "In production", trailer: true, date: "August 6, 2026",
       title: "Voicing NPCs for <em>Knight's Path</em>",
       body: "Guards, villagers, and a few people who would really rather you left their tavern. Dialect work across the whole cast, and the first trailer is now up." },
+    { tone: "steel", medium: "Audiobook", status: "Out now", date: "October 1, 2026",
+      listen: AUDIBLE_BOOK_OF_WISDOM,
+      title: "<em>The Book of Wisdom</em> is out on Audible",
+      body: "Elias Thorne's guide to Hermetic principles and sacred geometry, six and a half hours of it, cleared review and went live today. That is two titles out in nine days, which is not a pace I expect to keep, but I am enjoying it while it lasts." },
     { tone: "steel", medium: "Audiobook", status: "Out now", date: "September 30, 2026",
       listen: AUDIBLE_I_WASNT_ME,
       title: "<em>I Wasn't Me Until I Left Everything Behind</em> is out on Audible",
