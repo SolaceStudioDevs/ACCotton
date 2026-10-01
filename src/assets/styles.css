@@ -605,10 +605,13 @@ a { color: inherit; }
 .credit__cover {
   display: block;
   width: 120px;
-  height: 120px;
+  height: auto;
   border-radius: 8px;
   box-shadow: var(--shadow-md);
 }
+/* A transparent logo is not a cover; a card shadow around it reads as a bug. */
+.credit__cover--plain { border-radius: 0; box-shadow: none; }
+.credit__coverlink:hover .credit__cover--plain { box-shadow: none; }
 .credit__coverlink {
   display: block;
   border-radius: 8px;
