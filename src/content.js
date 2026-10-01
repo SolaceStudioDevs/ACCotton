@@ -65,7 +65,7 @@ export const meta = {
   reels: {
     title: "Demo Reels — A.C. Cotton",
     description:
-      "Five long-form narration samples: folklore and horror, literary prose, warm reassurance, and suspense. Listen in full.",
+      "Five long-form narration samples: folklore and horror, literary prose, historical romance, and suspense. Listen in full.",
   },
   credits: {
     title: "Credits — A.C. Cotton",
@@ -158,8 +158,8 @@ export const reels = [
     blurb: "Werewolf folklore carried at length. Atmosphere and pacing built for a sustained listen rather than a quick clip." },
   { n: "02", title: "The Book of Wisdom",         kicker: "Long-form narration", tag: "Reflective & literary", file: "book-of-wisdom",
     blurb: "A reflective, wisdom-literature register — measured and unhurried." },
-  { n: "03", title: "The Anatomy of Reassurance", kicker: "Long-form narration", tag: "Warm & reassuring",     file: "anatomy-of-reassurance",
-    blurb: "Warm and steady, paced to settle the listener rather than perform at them." },
+  { n: "03", title: "His Hand-Me-Down Countess", kicker: "Long-form narration", tag: "Historical romance",    file: "his-hand-me-down-countess",
+    blurb: "Sorcha Mowbray's Victorian romance — warm and close, played for the people rather than the period." },
   { n: "04", title: "Knife Point",                kicker: "Audition submission", tag: "Suspense & thriller",   file: "knife-point",
     blurb: "Suspense at length, submitted for audition — tension held across a long stretch of prose." },
   { n: "05", title: "Hunting for My Obsession",   kicker: "Audition submission", tag: "Long-form narration",   file: "hunting-for-my-obsession",
@@ -168,7 +168,7 @@ export const reels = [
 
 export const reelsIntro = {
   heading: "Reels, dialects & narration.",
-  lede: "Folklore, literary prose, warm reassurance, suspense. Click a waveform to play it, click again to scrub.",
+  lede: "Folklore, literary prose, historical romance, suspense. Click a waveform to play it, click again to scrub.",
 };
 
 /* --- Credits -------------------------------------------------------------- */
