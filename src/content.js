@@ -132,6 +132,8 @@ export const about = {
     { label: "Microphone", value: "Shure MV7+",      sub: "USB-C / XLR hybrid dynamic" },
     { label: "Room",       value: "Quiet home studio", sub: "Ready to record today" },
     { label: "Delivery",   value: "Multiple takes",  sub: "Fast turnaround" },
+    { label: "Union status", value: "Non-union",     sub: "Available for non-union projects" },
+    { label: "Membership", value: "APA member",      sub: "Audio Publishers Association" },
   ],
   chipGroups: [
     {
@@ -248,7 +250,17 @@ export const contact = {
     label: "Project brief",
     types: ["Audiobook", "Game / character", "Commercial", "Other"],
     submit: "Send brief",
+    privacy: "Briefs are emailed straight to me and used only to reply. Nothing is shared, sold, or added to a mailing list.",
   },
+};
+
+/* --- Footer ---------------------------------------------------------------
+   Section pages only. The hub is a full-screen composition and a footer
+   fights it. {year} is filled in at build time so the notice cannot go
+   stale on its own. */
+export const footer = {
+  copyright: "© {year} A.C. Cotton. All rights reserved.",
+  note: "Cover art and game assets remain the property of their respective publishers.",
 };
 
 /* --- Updates -------------------------------------------------------------

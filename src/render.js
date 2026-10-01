@@ -106,6 +106,10 @@ function chrome(key, bodyHTML) {
   <main class="body body--${key}" id="main">
 ${bodyHTML}
   </main>
+  <footer class="foot">
+    <p class="foot__copy">${esc(C.footer.copyright.replace("{year}", new Date().getFullYear()))}</p>
+    <p class="foot__note">${esc(C.footer.note)}</p>
+  </footer>
 </div>`;
 }
 
@@ -346,6 +350,7 @@ ${links}
           </div>
           <button class="brief__submit" type="submit">${esc(c.form.submit)}</button>
           <p class="brief__status" role="status" aria-live="polite"></p>
+          <p class="brief__privacy">${esc(c.form.privacy)}</p>
         </div>
       </form>
     </div>`;
@@ -407,6 +412,11 @@ export function page(key, peaks, assets) {
     url: C.site.origin + "/",
     email: "mailto:" + C.site.email,
     image: C.site.origin + "/img/headshot-900.jpg",
+    memberOf: {
+      "@type": "Organization",
+      name: "Audio Publishers Association",
+      url: "https://www.audiopub.org/",
+    },
     sameAs: C.contact.links.filter((l) => l.external).map((l) => l.href),
   })}</script>` : "";
 
