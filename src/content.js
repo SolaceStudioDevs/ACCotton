@@ -133,7 +133,11 @@ export const about = {
     { label: "Room",       value: "Quiet home studio", sub: "Ready to record today" },
     { label: "Delivery",   value: "Multiple takes",  sub: "Fast turnaround" },
     { label: "Union status", value: "Non-union",     sub: "Available for non-union projects" },
-    { label: "Membership", value: "APA member",      sub: "Audio Publishers Association" },
+    // PLACEHOLDER MARK: rebuilt from a screenshot, not the APA's own artwork.
+    // Swap in their file as soon as they send a media kit — theirs will be
+    // outlined, correctly typeset, and licensed for member use.
+    { label: "Membership", value: "APA member",      sub: "Audio Publishers Association",
+      logo: "/img/apa-logo.svg", logoAlt: "Audio Publishers Association" },
   ],
   chipGroups: [
     {

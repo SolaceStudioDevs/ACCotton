@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442 155" width="442" height="155" role="img" aria-label="Audio Publishers Association">
+  <title>Audio Publishers Association</title>
+
+  <!-- Teal field, sampled from the source: #228B88 -->
+  <rect width="442" height="155" fill="#228B88"/>
+
+  <!-- Four discs, r=31, 71px apart, centre line y=58.5 -->
+  <g fill="#FFFFFF">
+    <circle cx="101.5" cy="58.5" r="31"/>
+    <circle cx="172.5" cy="58.5" r="31"/>
+    <circle cx="243.5" cy="58.5" r="31"/>
+    <circle cx="314.5" cy="58.5" r="31"/>
+  </g>
+
+  <!-- Letterforms knocked out of the discs in the field colour -->
+  <g fill="#228B88" font-family="Lato, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+     font-size="40" font-weight="700" text-anchor="middle">
+    <text x="101.5" y="73">A</text>
+    <text x="172.5" y="73">P</text>
+    <text x="243.5" y="73">A</text>
+  </g>
+
+  <!-- Play triangle, matching the width the letters occupy -->
+  <path d="M305 44 L331 58.5 L305 73 Z" fill="#228B88"/>
+
+  <!-- Wordmark: cap height 16px in the source, so ~23px type on a 127 baseline -->
+  <text x="207" y="127" fill="#FFFFFF" text-anchor="middle"
+        font-family="Lato, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="23" font-weight="400" letter-spacing="1.8">Audio Publishers Association</text>
+</svg>

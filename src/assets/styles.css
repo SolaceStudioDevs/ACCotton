@@ -451,6 +451,19 @@ a { color: inherit; }
   margin: 2px 0;
 }
 .spec__sub { font-size: 12px; opacity: .8; }
+/* The mark carries its own teal field; the card matches it so the artwork
+   reads as the card rather than a sticker dropped on one. */
+.spec--logo {
+  background: #228b88;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+.spec__logo { display: block; width: 100%; max-width: 170px; height: auto; }
+.spec--logo .spec__sub { opacity: .9; }
 
 .chipgroups {
   display: grid;

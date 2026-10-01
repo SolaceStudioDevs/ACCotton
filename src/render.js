@@ -117,12 +117,23 @@ ${bodyHTML}
 
 function about() {
   const a = C.about;
-  const specs = a.specs.map((s, i) =>
-    `<div class="spec${i === 0 ? " spec--dark" : ""}">
+  const specs = a.specs.map((s, i) => {
+    // A spec carrying a logo shows the mark in place of its value line; the
+    // mark already carries the organisation's name, so repeating it would
+    // read twice to a screen reader.
+    if (s.logo) {
+      return `<div class="spec spec--logo">
+        <img class="spec__logo" src="${esc(s.logo)}" alt="${esc(s.logoAlt)}"
+             width="442" height="155" loading="lazy" decoding="async">
+        <div class="spec__sub">${esc(s.value)}</div>
+      </div>`;
+    }
+    return `<div class="spec${i === 0 ? " spec--dark" : ""}">
         <div class="spec__label">${esc(s.label)}</div>
         <div class="spec__value">${esc(s.value)}</div>
         <div class="spec__sub">${esc(s.sub)}</div>
-      </div>`).join("\n      ");
+      </div>`;
+  }).join("\n      ");
 
   const groups = a.chipGroups.map((g) =>
     `<div class="chipgroup">
