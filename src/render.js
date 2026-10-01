@@ -251,7 +251,9 @@ function credits() {
           <div class="credit__titles">
             <span class="credit__title">${esc(c.role)}${work}</span>${trailer}${listen}
           </div>
-          <div class="credit__meta">${esc(c.meta)}</div>
+          <div class="credit__meta">${esc(c.meta)}</div>${c.summary
+            ? `\n          <p class="credit__summary">${esc(c.summary)}</p>`
+            : ""}
         </div>
         <div class="${status}">${esc(c.status)}</div>
       </article>`;

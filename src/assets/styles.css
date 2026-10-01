@@ -651,6 +651,13 @@ a { color: inherit; }
   font-size: 23px;
 }
 .credit__meta { font-size: 13px; opacity: .85; margin-top: 2px; }
+.credit__summary {
+  margin: var(--space-3) 0 0;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.55;
+  opacity: .9;
+}
 .credit__status { font-size: 13px; justify-self: end; text-align: right; }
 .credit__status--live {
   justify-self: end;
