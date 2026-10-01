@@ -208,7 +208,8 @@ export const credits = {
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou", em: true,
       cover: "cover-loup-garou", coverH: 132,
       coverAlt: "Cover art for Loup-Garou by Kevin Schumacher",
-      meta: "Kevin Schumacher · Folklore & horror", status: "In production" },
+      meta: "Kevin Schumacher · Folklore & horror", status: "In production",
+      summary: "A man at a Maine lake camp starts waking with something in the room and his body refusing to move. The search for an explanation runs from brain scans to a skull turned up in his own ground to a root doctor on Daufuskie Island — twenty chapters of slow dread, first person, in the voice of someone working hard to stay reasonable about it." },
   ],
   footnote: "More credits added as new roles are booked.",
 };
