@@ -222,6 +222,10 @@ function credits() {
     const listen = c.listen
       ? `\n            <a class="listen" href="${esc(c.listen)}" target="_blank" rel="noreferrer">Listen on Audible →</a>`
       : "";
+    // A second pill for anything with a home of its own, next to the trailer.
+    const site = c.site
+      ? `\n            <a class="trailer" href="${esc(c.site)}" target="_blank" rel="noreferrer">${esc(c.siteLabel)}</a>`
+      : "";
     // A released title renders its status as a badge rather than plain text.
     const status = c.live ? "credit__status credit__status--live" : "credit__status";
     // Cover art where there is a published title to show one for. It sits in
@@ -249,7 +253,7 @@ function credits() {
         </div>
         <div>
           <div class="credit__titles">
-            <span class="credit__title">${esc(c.role)}${work}</span>${trailer}${listen}
+            <span class="credit__title">${esc(c.role)}${work}</span>${trailer}${listen}${site}
           </div>
           <div class="credit__meta">${esc(c.meta)}</div>${c.summary
             ? `\n          <p class="credit__summary">${esc(c.summary)}</p>`
