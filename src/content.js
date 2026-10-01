@@ -202,7 +202,9 @@ export const credits = {
       trailer: true,
       // Transparent logo rather than cover art, so it carries no card or shadow.
       cover: "cover-knights-path", coverExt: "png", coverH: 102, coverPlain: true,
-      coverHref: "https://www.knightspath.net",
+      // Steam rather than the game's own site: a wishlist there is worth more
+      // to the developers than a homepage visit.
+      coverHref: "https://store.steampowered.com/app/2855590/Knights_Path/",
       coverAlt: "Knight's Path logo",
       meta: "Character and dialect work · Medieval historical", status: "In production",
       summary: "A story-driven action RPG in a grounded low-fantasy world modelled on the Holy Roman Empire — villages, manors, ruined castles, and the city of Eranthold. Combat follows Historical European Martial Arts rather than arcade flourish: deliberate, weighty, every action intentional." },
