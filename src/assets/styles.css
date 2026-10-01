@@ -595,6 +595,20 @@ a { color: inherit; }
 }
 .credit--dark  { background: var(--color-accent-900); color: var(--color-accent-100); }
 .credit--steel { background: var(--color-accent-700); color: var(--color-accent-100); }
+.credit__lead {
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.credit__cover {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
 .credit__medium { justify-self: start; padding: 5px 14px; font-size: 11px; }
 .credit--dark  .credit__medium { background: var(--color-accent-700); color: var(--color-bg); }
 .credit--steel .credit__medium { background: var(--color-accent-200); color: var(--color-accent-900); }
@@ -954,7 +968,7 @@ a { color: inherit; }
     grid-template-columns: 1fr;
     gap: var(--space-3);
   }
-  .credit__medium, .credit__status, .credit__status--live { justify-self: start; text-align: left; }
+  .credit__lead, .credit__medium, .credit__status, .credit__status--live { justify-self: start; text-align: left; }
   .section h2 { font-size: 38px; }
   .body { padding: var(--space-6); }
 }

@@ -182,9 +182,11 @@ export const credits = {
   items: [
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "I Wasn't Me Until I Left Everything Behind", em: true,
       listen: AUDIBLE_I_WASNT_ME,
+      cover: "cover-i-wasnt-me", coverAlt: "Cover of I Wasn't Me Until I Left Everything Behind by Christin Niebanck",
       meta: "Christin Niebanck · Memoir", status: "Out now", live: true },
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "The Book of Wisdom: The Hidden Order Behind All Things", em: true,
       listen: AUDIBLE_BOOK_OF_WISDOM,
+      cover: "cover-book-of-wisdom", coverAlt: "Cover of The Book of Wisdom: The Hidden Order Behind All Things by Elias Thorne",
       meta: "Elias Thorne · Esoteric non-fiction", status: "Out now", live: true },
     { medium: "Video game", tone: "dark", role: "NPC voice actor — ", work: "Knight's Path", em: true,
       trailer: true, meta: "Character and dialect work · Medieval historical", status: "In production" },
