@@ -12,6 +12,9 @@
   --color-surface: #e9e9ea;
   --color-text: #1d1f20;
   --color-accent: #5980a6;
+  /* The light colour that sits on a dark accent — a chip label, a pill, a
+     button face. Not the page background, even when they used to match. */
+  --color-on-dark: #f2f2f3;
   --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
 
   --color-neutral-100: #f5f5f8;
@@ -54,6 +57,29 @@
 
   --ease-wipe: cubic-bezier(.7, 0, .28, 1);
   --hub-zoom: 1;
+
+  /* The waveform that the reels draw, reused as the site's rule. Masked
+     rather than coloured, so it takes whatever colour is set on it. */
+  --wave-svg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27192%27%20height%3D%2724%27%20viewBox%3D%270%200%20192%2024%27%20fill%3D%27black%27%3E%3Crect%20x%3D%270%27%20y%3D%279.0%27%20width%3D%273%27%20height%3D%276%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%276%27%20y%3D%277.0%27%20width%3D%273%27%20height%3D%2710%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2712%27%20y%3D%274.0%27%20width%3D%273%27%20height%3D%2716%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2718%27%20y%3D%271.0%27%20width%3D%273%27%20height%3D%2722%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2724%27%20y%3D%275.0%27%20width%3D%273%27%20height%3D%2714%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2730%27%20y%3D%278.0%27%20width%3D%273%27%20height%3D%278%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2736%27%20y%3D%276.0%27%20width%3D%273%27%20height%3D%2712%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2742%27%20y%3D%272.0%27%20width%3D%273%27%20height%3D%2720%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2748%27%20y%3D%270.0%27%20width%3D%273%27%20height%3D%2724%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2754%27%20y%3D%275.5%27%20width%3D%273%27%20height%3D%2713%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2760%27%20y%3D%278.5%27%20width%3D%273%27%20height%3D%277%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2766%27%20y%3D%276.5%27%20width%3D%273%27%20height%3D%2711%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2772%27%20y%3D%273.0%27%20width%3D%273%27%20height%3D%2718%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2778%27%20y%3D%277.5%27%20width%3D%273%27%20height%3D%279%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2784%27%20y%3D%274.5%27%20width%3D%273%27%20height%3D%2715%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2790%27%20y%3D%271.5%27%20width%3D%273%27%20height%3D%2721%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%2796%27%20y%3D%276.0%27%20width%3D%273%27%20height%3D%2712%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27102%27%20y%3D%279.0%27%20width%3D%273%27%20height%3D%276%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27108%27%20y%3D%277.0%27%20width%3D%273%27%20height%3D%2710%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27114%27%20y%3D%273.5%27%20width%3D%273%27%20height%3D%2717%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27120%27%20y%3D%270.5%27%20width%3D%273%27%20height%3D%2723%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27126%27%20y%3D%276.5%27%20width%3D%273%27%20height%3D%2711%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27132%27%20y%3D%278.0%27%20width%3D%273%27%20height%3D%278%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27138%27%20y%3D%275.0%27%20width%3D%273%27%20height%3D%2714%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27144%27%20y%3D%272.5%27%20width%3D%273%27%20height%3D%2719%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27150%27%20y%3D%277.0%27%20width%3D%273%27%20height%3D%2710%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27156%27%20y%3D%279.0%27%20width%3D%273%27%20height%3D%276%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27162%27%20y%3D%275.5%27%20width%3D%273%27%20height%3D%2713%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27168%27%20y%3D%272.0%27%20width%3D%273%27%20height%3D%2720%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27174%27%20y%3D%274.0%27%20width%3D%273%27%20height%3D%2716%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27180%27%20y%3D%277.5%27%20width%3D%273%27%20height%3D%279%27%20rx%3D%271.5%27%2F%3E%3Crect%20x%3D%27186%27%20y%3D%278.5%27%20width%3D%273%27%20height%3D%277%27%20rx%3D%271.5%27%2F%3E%3C%2Fsvg%3E");
+  --grain-svg: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.8%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27160%27%20height%3D%27160%27%20filter%3D%27url(%23n)%27%2F%3E%3C%2Fsvg%3E");
+}
+
+/* --- Dark sections ---------------------------------------------------------
+   The hub is dark and the sections were light, so every click turned the
+   lights on. These re-point the neutral ramp; delete this block to go back
+   to the light pages. Everything below reads the tokens, not the values. */
+:root {
+  --color-bg: #16222e;
+  --color-surface: #1d2d3d;
+  --color-text: #eef6ff;
+  --color-divider: color-mix(in srgb, #eef6ff 18%, transparent);
+
+  --color-neutral-100: #223447;   /* card and panel surfaces */
+  --color-neutral-200: #2c4258;   /* chips */
+  --color-neutral-400: #5e7a96;   /* waveform bars */
+  --color-neutral-600: #93a9bd;   /* fine print */
+  --color-neutral-700: #afc3d6;   /* muted body copy */
+  --color-neutral-800: #dceaf7;   /* text sitting on a chip */
 }
 
 /* --- Reset / base --------------------------------------------------------- */
@@ -129,6 +155,20 @@ a { color: inherit; }
               #2c455d 0%, #1d2d3d 62%, var(--color-hub-deep) 100%);
   color: var(--color-accent-100);
   overflow: hidden;
+  position: relative;
+}
+/* A flat gradient reads as a screen; grain gives it the warmth of tape. */
+.hub::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .05;
+  background-image: var(--grain-svg);
+  background-size: 160px 160px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hub::after { mix-blend-mode: overlay; }
 }
 
 .hub__head {
@@ -285,7 +325,7 @@ a { color: inherit; }
   gap: 4px;
   padding: var(--space-6);
   border-radius: 20px;
-  background: var(--color-bg);
+  background: var(--color-on-dark);
   color: var(--color-accent-900);
   box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
 }
@@ -361,7 +401,23 @@ a { color: inherit; }
   to   { opacity: 1; transform: none; }
 }
 
-.section h2 { font-size: 46px; }
+.section h2 {
+  font-size: clamp(46px, 6.4vw, 84px);
+  line-height: .95;
+  letter-spacing: -.012em;
+}
+/* Short wave under every section title. */
+.section h2::after {
+  content: "";
+  display: block;
+  width: 128px;
+  height: 13px;
+  margin-top: 18px;
+  background-color: var(--color-accent-500);
+  -webkit-mask: var(--wave-svg) repeat-x left center / auto 100%;
+  mask: var(--wave-svg) repeat-x left center / auto 100%;
+  opacity: .6;
+}
 
 /* Per-section heading spacing, matching the prototype. */
 .body--credits > h2,
@@ -384,7 +440,7 @@ a { color: inherit; }
   cursor: pointer;
   transition: background .18s;
 }
-.pill--dark  { background: var(--color-accent-900); color: var(--color-bg); }
+.pill--dark  { background: var(--color-accent-900); color: var(--color-on-dark); }
 .pill--dark:hover { background: var(--color-accent-700); }
 .pill--light { background: var(--color-accent-200); color: var(--color-accent-900); }
 .pill--light:hover { background: var(--color-accent-300); }
@@ -479,7 +535,7 @@ a { color: inherit; }
 }
 .chipgroup__list { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip--light { background: var(--color-accent-200); color: var(--color-accent-900); }
-.chip--steel { background: var(--color-accent-700); color: var(--color-bg); }
+.chip--steel { background: var(--color-accent-700); color: var(--color-on-dark); }
 
 /* ==========================================================================
    Demo reels — the listening room
@@ -543,7 +599,7 @@ a { color: inherit; }
   border-radius: 999px;
   padding: 11px 24px;
   background: var(--color-accent-900);
-  color: var(--color-bg);
+  color: var(--color-on-dark);
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 14px;
@@ -637,7 +693,7 @@ a { color: inherit; }
   outline-offset: 3px;
 }
 .credit__medium { justify-self: start; padding: 5px 14px; font-size: 11px; }
-.credit--dark  .credit__medium { background: var(--color-accent-700); color: var(--color-bg); }
+.credit--dark  .credit__medium { background: var(--color-accent-700); color: var(--color-on-dark); }
 .credit--steel .credit__medium { background: var(--color-accent-200); color: var(--color-accent-900); }
 .credit__titles {
   display: flex;
@@ -675,7 +731,7 @@ a { color: inherit; }
   border-radius: 999px;
   padding: 6px 15px;
   font-size: 12px;
-  background: var(--color-bg);
+  background: var(--color-on-dark);
   color: var(--color-accent-900);
   text-decoration: none;
   white-space: nowrap;
@@ -714,7 +770,7 @@ a { color: inherit; }
   font-weight: 600;
   font-size: 52px;
   line-height: 1;
-  color: var(--color-bg);
+  color: var(--color-on-dark);
   margin-top: var(--space-2);
 }
 .rate-hero__unit { font-size: 14px; color: var(--color-accent-300); }
@@ -779,7 +835,7 @@ a { color: inherit; }
 .clink:hover { background: var(--color-accent-200); }
 .clink--dark {
   background: var(--color-accent-900);
-  color: var(--color-bg);
+  color: var(--color-on-dark);
 }
 .clink--dark:hover { background: var(--color-accent-700); }
 .clink__label {
@@ -825,13 +881,15 @@ a { color: inherit; }
   font: inherit;
   font-size: 14px;
   background: var(--color-surface);
-  border: 1px solid rgba(29, 31, 32, .16);
+  color: var(--color-text);
+  border: 1px solid color-mix(in srgb, #eef6ff 18%, transparent);
   border-radius: 12px;
   caret-color: var(--color-accent);
   transition: border-color .18s;
 }
+.field input::placeholder, .field textarea::placeholder { color: #7f94a8; }
 .field textarea { min-height: 90px; resize: vertical; }
-.field input:hover, .field textarea:hover { border-color: rgba(29, 31, 32, .45); }
+.field input:hover, .field textarea:hover { border-color: color-mix(in srgb, #eef6ff 42%, transparent); }
 .field input:focus, .field textarea:focus { border-color: var(--color-accent); outline: none; }
 .field--pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 
@@ -870,7 +928,7 @@ a { color: inherit; }
   border-radius: 999px;
   padding: 14px;
   background: var(--color-accent-900);
-  color: var(--color-bg);
+  color: var(--color-on-dark);
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 16px;
@@ -915,7 +973,7 @@ a { color: inherit; }
   color: var(--color-accent-100);
 }
 .post__chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
-.post--dark  .post__medium { background: var(--color-accent-700); color: var(--color-bg); }
+.post--dark  .post__medium { background: var(--color-accent-700); color: var(--color-on-dark); }
 .post--steel .post__medium { background: var(--color-accent-200); color: var(--color-accent-900); }
 .post__status {
   font-size: 11px;
@@ -932,7 +990,7 @@ a { color: inherit; }
 }
 .post--dark  .post__date { color: var(--color-accent-400); }
 .post--steel .post__date { color: var(--color-accent-300); }
-.post--dark  .post__title { font-size: 32px; color: var(--color-bg); margin: var(--space-3) 0 var(--space-2); }
+.post--dark  .post__title { font-size: 32px; color: var(--color-on-dark); margin: var(--space-3) 0 var(--space-2); }
 .post--steel .post__title { font-size: 28px; margin: var(--space-3) 0 var(--space-2); }
 .post__body { font-size: 16px; line-height: 1.6; max-width: 68ch; color: var(--color-accent-200); }
 .post__trailer,
@@ -941,7 +999,7 @@ a { color: inherit; }
   border-radius: 999px;
   padding: 9px 20px;
   font-size: 14px;
-  background: var(--color-bg);
+  background: var(--color-on-dark);
   color: var(--color-accent-900);
   text-decoration: none;
   margin-top: var(--space-4);
@@ -979,6 +1037,20 @@ a { color: inherit; }
 }
 .wipe__edge i { flex: 1; background: var(--color-accent-900); }
 
+/* The bright line the wipe leaves behind reads as a playhead crossing the
+   page, which is the metaphor the ragged edge was already reaching for. */
+.wipe::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 100%;
+  width: 3px;
+  background: var(--color-accent-200);
+  box-shadow: 0 0 20px 5px color-mix(in srgb, var(--color-accent-200) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wipe::after { display: none; }
+}
+
 .wipe__label {
   font-family: var(--font-heading);
   font-weight: 600;
@@ -995,15 +1067,35 @@ a { color: inherit; }
    Footer
    ========================================================================== */
 
+/* A rule made of the thing the site is about. */
+.wave-rule {
+  display: block;
+  height: 14px;
+  background-color: var(--color-accent-600);
+  -webkit-mask: var(--wave-svg) repeat-x left center / auto 100%;
+  mask: var(--wave-svg) repeat-x left center / auto 100%;
+  opacity: .55;
+}
+
 .foot {
+  position: relative;
   max-width: 1120px;
   margin: 0 auto;
   padding: var(--space-8) var(--space-8) var(--space-6);
-  border-top: 1px solid var(--color-divider);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--space-3);
+}
+.foot::before {
+  content: "";
+  position: absolute;
+  left: var(--space-8); right: var(--space-8); top: 0;
+  height: 12px;
+  background-color: var(--color-accent-600);
+  -webkit-mask: var(--wave-svg) repeat-x left center / auto 100%;
+  mask: var(--wave-svg) repeat-x left center / auto 100%;
+  opacity: .4;
 }
 .foot p { margin: 0; font-size: 12px; color: var(--color-neutral-600); }
 .foot__note { opacity: .85; }
@@ -1026,7 +1118,7 @@ a { color: inherit; }
     gap: var(--space-3);
   }
   .credit__lead, .credit__medium, .credit__status, .credit__status--live { justify-self: start; text-align: left; }
-  .section h2 { font-size: 38px; }
+  .section h2 { font-size: 40px; }
   .body { padding: var(--space-6); }
 }
 
@@ -1249,7 +1341,8 @@ a { color: inherit; }
   .bar__steps { width: 100%; margin-left: 0; justify-content: space-between; }
   .bar__step { padding: 7px 12px; font-size: 12px; }
   .body { padding: var(--space-6) var(--space-4); }
-  .section h2 { font-size: 32px; }
+  .section h2 { font-size: 34px; }
+  .section h2::after { width: 96px; height: 11px; margin-top: 14px; }
 
   .reel { padding: var(--space-4); }
   .reel__title { font-size: 22px; white-space: normal; }
