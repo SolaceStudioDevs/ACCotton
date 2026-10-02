@@ -307,7 +307,7 @@ ${cards}
 function contact() {
   const c = C.contact;
   const links = c.links.map((l) => {
-    const ext = l.external ? ` target="_blank" rel="noreferrer"` : "";
+    const ext = l.external || l.newTab ? ` target="_blank" rel="noreferrer"` : "";
     return `        <a class="clink${l.tone === "dark" ? " clink--dark" : ""}"` +
            ` href="${esc(l.href)}"${ext}>` +
            `<span class="clink__label">${esc(l.label)}</span>` +
@@ -451,7 +451,10 @@ export function page(key, peaks, assets) {
 <meta property="og:url" content="${esc(canonical)}">
 <meta property="og:title" content="${esc(m.title)}">
 <meta property="og:description" content="${esc(m.description)}">
-<meta property="og:image" content="${esc(C.site.origin)}/img/headshot-900.jpg">
+<meta property="og:image" content="${esc(C.site.origin)}/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A.C. Cotton, Voice Actor and Narrator — two titles out now on Audible">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1d2d3d">
 

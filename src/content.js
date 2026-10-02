@@ -256,6 +256,9 @@ export const contact = {
     { label: "ACX profile",      meta: "Audiobook auditions",    href: "https://www.acx.com/narrator?p=AH452LR18HLKW", external: true },
     { label: "Voice123 profile", meta: "Casting calls",          href: "https://voice123.com/voice-actor/adamcotton?vref=AO0U6HKC&utm_medium=Share&utm_campaign=Profile&utm_source=Direct", external: true },
     { label: "Facebook",         meta: "ACCottonSpeaks",         href: "https://www.facebook.com/ACCottonSpeaks", external: true },
+    // newTab rather than external: it opens in its own tab like the profiles,
+    // but it is not a profile and has no business in the sameAs list.
+    { label: "Voice resume",     meta: "One-page PDF",           href: "/AC-Cotton-Voice-Resume.pdf", newTab: true },
   ],
   form: {
     label: "Project brief",
