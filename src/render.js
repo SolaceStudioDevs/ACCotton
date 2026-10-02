@@ -391,8 +391,9 @@ function updates() {
           <span class="chip post__medium">${esc(p.medium)}</span>
           <span class="post__status">${esc(p.status)}</span>
         </div>${date}
-        <h3 class="post__title">${p.title}</h3>
-        <p class="post__body">${esc(p.body)}</p>${trailer}${listen}
+        <h3 class="post__title">${p.title}</h3>${p.body
+          ? `\n        <p class="post__body">${esc(p.body)}</p>`
+          : ""}${trailer}${listen}
       </article>`;
   }).join("\n");
 
