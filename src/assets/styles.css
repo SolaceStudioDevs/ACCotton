@@ -1099,26 +1099,46 @@ a { color: inherit; }
   justify-content: space-between;
   gap: var(--space-3);
 }
-.foot::before {
-  content: "";
+.foot__wave {
   position: absolute;
   left: var(--space-8); right: var(--space-8); top: 0;
   height: 12px;
-  background-color: var(--color-accent-600);
-  -webkit-mask: var(--wave-svg) repeat-x left center / auto 100%;
-  mask: var(--wave-svg) repeat-x left center / auto 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
   opacity: .4;
 }
+.foot__wave i {
+  flex: 0 0 2px;
+  width: 2px;
+  height: calc(var(--h) * 100%);
+  min-height: 0;
+  background: var(--color-accent-600);
+  border-radius: 1px;
+  transform-origin: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  /* Drifts by exactly one tile, so the loop is seamless. Slow enough to read
-     as a running signal rather than something demanding attention. */
-  .foot::before { animation: wave-drift 18s linear infinite; }
-  @keyframes wave-drift {
-    from { -webkit-mask-position: 0 center; mask-position: 0 center; }
-    to   { -webkit-mask-position: -240px center; mask-position: -240px center; }
+  /* Idles like a signal sitting at rest. The negative delay staggers the bars
+     into a travelling ripple rather than one synchronised pulse, and the
+     animation only runs while the footer is actually on screen. */
+  .foot__wave i {
+    animation: wave-breathe 2.6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -65ms);
+  }
+  /* Paused rather than gated on: if the observer never reports (it does not
+     fire at all in some embedded views), the rule should still animate. */
+  .foot__wave.is-offscreen i { animation-play-state: paused; }
+  @keyframes wave-breathe {
+    0%, 100% { transform: scaleY(.72); }
+    50%      { transform: scaleY(1.18); }
   }
 }
 
+/* While a reel plays, app.js writes --h per bar from the real envelope, so
+   the idle loop has to get out of the way. */
+.foot__wave.is-playing i { animation: none; transform: none; }
 .foot p { margin: 0; font-size: 12px; color: var(--color-neutral-600); }
 .foot__note { opacity: .85; }
 

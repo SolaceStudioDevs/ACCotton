@@ -190,6 +190,57 @@ const fmt = (x) => {
   return m + ":" + String(s).padStart(2, "0");
 };
 
+/* --- The footer waveform ---------------------------------------------------
+   Bars rather than a masked image, so heights can actually change. It idles on
+   its own in CSS; while a reel is playing, initReels hands it the real envelope
+   and it reads out whatever is passing under the playhead. */
+
+let footWave = null;
+
+function initFootWave(scope) {
+  const el = scope.querySelector(".foot__wave");
+  if (!el) return null;
+
+  const bars = [...el.children];
+  // What each bar sits at when nothing is playing, so idle can be restored.
+  const rest = bars.map((b) => b.style.getPropertyValue("--h"));
+  let last = 0;
+
+  // Animating a footer nobody is looking at is pure waste; the idle loop only
+  // runs while it is actually on screen.
+  const io = new IntersectionObserver(
+    ([e]) => el.classList.toggle("is-offscreen", !e.isIntersecting),
+    { rootMargin: "80px" });
+  io.observe(el);
+
+  footWave = {
+    /* vals: the reel's own peak array. ratio: 0-1 through the track. */
+    drive(vals, ratio) {
+      if (el.classList.contains("is-offscreen")) return;
+      const now = performance.now();
+      if (now - last < 42) return;          // ~24fps is plenty for 280 bars
+      last = now;
+      el.classList.add("is-playing");
+      const n = bars.length;
+      const centre = ratio * vals.length;
+      for (let i = 0; i < n; i++) {
+        // A window of the envelope either side of the playhead, so the real
+        // shape of the recording scrolls past as it plays.
+        const idx = Math.round(centre + (i - n / 2) * 0.2);
+        const v = idx >= 0 && idx < vals.length ? vals[idx] : 0;
+        bars[i].style.setProperty("--h", v.toFixed(3));
+      }
+    },
+    idle() {
+      if (!el.classList.contains("is-playing")) return;
+      el.classList.remove("is-playing");
+      bars.forEach((b, i) => b.style.setProperty("--h", rest[i]));
+    },
+  };
+
+  return () => { io.disconnect(); footWave = null; };
+}
+
 function initReels(scope) {
   const list = scope.querySelectorAll(".reel");
   if (!list.length) return;
@@ -218,6 +269,25 @@ function initReels(scope) {
     for (let i = 0; i < n; i++) {
       rects[i].classList.toggle("is-played", (i + 0.5) / n <= ratio);
     }
+  };
+
+  // Runs only while something is playing, and stops the moment it is not.
+  let raf = 0;
+  const pump = () => {
+    raf = 0;
+    if (!footWave || !active || active.audio.paused) { footWave?.idle(); return; }
+    const data = peaks[active.reel.dataset.file];
+    const vals = data && data["134"];
+    const dur = active.audio.duration;
+    if (vals && isFinite(dur) && dur) {
+      footWave.drive(vals, active.audio.currentTime / dur);
+    }
+    raf = requestAnimationFrame(pump);
+  };
+  const startPump = () => { if (!raf) raf = requestAnimationFrame(pump); };
+  const stopPump = () => {
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    footWave?.idle();
   };
 
   list.forEach((reel) => {
@@ -311,6 +381,10 @@ function initReels(scope) {
       showTime();
     });
 
+    audio.addEventListener("play", startPump);
+    audio.addEventListener("pause", stopPump);
+    audio.addEventListener("ended", stopPump);
+
     audio.addEventListener("timeupdate", () => {
       if (active !== p || !isFinite(audio.duration) || !audio.duration) return;
       paintProgress(reel, audio.currentTime / audio.duration);
@@ -341,7 +415,7 @@ function initReels(scope) {
   });
 
   // Leaving the listening room stops playback.
-  return () => players.forEach((p) => p.audio.pause());
+  return () => { stopPump(); players.forEach((p) => p.audio.pause()); };
 }
 
 /* --- Contact form ----------------------------------------------------------- */
@@ -480,7 +554,7 @@ let navigating = false;
 
 function mount(scope) {
   if (teardown) { teardown(); teardown = null; }
-  const stops = [initHub(scope), initReels(scope)].filter(Boolean);
+  const stops = [initHub(scope), initFootWave(scope), initReels(scope)].filter(Boolean);
   initForm(scope);
   teardown = () => stops.forEach((stop) => stop());
 }

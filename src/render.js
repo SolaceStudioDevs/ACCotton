@@ -107,6 +107,7 @@ function chrome(key, bodyHTML) {
 ${bodyHTML}
   </main>
   <footer class="foot">
+    ${footWave()}
     <p class="foot__copy">${esc(C.footer.copyright.replace("{year}", new Date().getFullYear()))}</p>
     <p class="foot__note">${esc(C.footer.note)}</p>
   </footer>
@@ -407,6 +408,32 @@ ${posts}
 /* --- Page shell -------------------------------------------------------------- */
 
 const SECTIONS = { about, reels, credits, rates, contact, updates };
+
+/* The footer rule, as elements rather than a mask.
+
+   A mask is a flat image: the only thing that can animate is where it sits,
+   which is why the first pass could only slide. Drawn as bars, each one can
+   change height — idling on its own, and tracking the real envelope of a reel
+   while one is playing (see app.js).
+
+   Heights are the delivered 240x12 tile read back out, one slot every 4px,
+   with its silences kept as zeros. The sequence repeats to fill the width. */
+const FOOT_WAVE = [
+  2, 6, 10, 8, 6, 4, 2, 4, 8, 6, 4, 2, 6, 12, 10, 8, 6, 4, 4, 2,
+  0, 0, 0, 4, 8, 6, 2, 10, 8, 6, 4, 2, 4, 6, 4, 2,
+  0, 0, 0, 0,
+  2, 8, 6, 4, 6, 10, 8, 4, 2, 4, 6, 4, 2, 2, 2, 4, 2,
+  0, 0, 0,
+];
+const FOOT_WAVE_BARS = 280;   // 4px pitch, enough for the widest the footer gets
+
+function footWave() {
+  const bars = Array.from({ length: FOOT_WAVE_BARS }, (_, i) => {
+    const h = FOOT_WAVE[i % FOOT_WAVE.length] / 12;
+    return `<i style="--h:${h.toFixed(3)};--i:${i % 40}"></i>`;
+  }).join("");
+  return `<div class="foot__wave" aria-hidden="true">${bars}</div>`;
+}
 
 export function page(key, peaks, assets) {
   const m = C.meta[key];
