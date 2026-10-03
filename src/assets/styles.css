@@ -40,7 +40,10 @@
   /* Outer stop of the hub gradient; sits below the accent ramp. */
   --color-hub-deep: #16222e;
 
-  --font-heading: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  /* WDXL Lubrifont ships one weight (400); headings ask for 600 and the
+     browser synthesises it, which is the look that was signed off. Barlow
+     Condensed stays as the fallback — it is already loaded for nothing. */
+  --font-heading: "WDXL Lubrifont JP N", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Barlow", ui-sans-serif, system-ui, sans-serif;
 
   /* Density 0.85x */
@@ -788,7 +791,9 @@ a { color: inherit; }
   font-weight: 600;
   font-size: 30px;
   line-height: 1.1;
-  color: var(--color-accent-700);
+  /* accent-700 read fine on the old light cards and all but disappeared on
+     the dark ones. The price is the point of the card; it leads now. */
+  color: var(--color-accent-300);
 }
 .rate__unit { font-size: 13px; color: var(--color-neutral-700); }
 
@@ -880,16 +885,18 @@ a { color: inherit; }
   padding: 6px 10px;
   font: inherit;
   font-size: 14px;
-  background: var(--color-surface);
+  /* Lighter than the panel, not darker: a field should read as somewhere to
+     type, not as a hole in the card. */
+  background: var(--color-neutral-200);
   color: var(--color-text);
-  border: 1px solid color-mix(in srgb, #eef6ff 18%, transparent);
+  border: 1px solid color-mix(in srgb, #eef6ff 30%, transparent);
   border-radius: 12px;
   caret-color: var(--color-accent);
   transition: border-color .18s;
 }
-.field input::placeholder, .field textarea::placeholder { color: #7f94a8; }
+.field input::placeholder, .field textarea::placeholder { color: #9bb0c4; }
 .field textarea { min-height: 90px; resize: vertical; }
-.field input:hover, .field textarea:hover { border-color: color-mix(in srgb, #eef6ff 42%, transparent); }
+.field input:hover, .field textarea:hover { border-color: color-mix(in srgb, #eef6ff 55%, transparent); }
 .field input:focus, .field textarea:focus { border-color: var(--color-accent); outline: none; }
 .field--pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 
