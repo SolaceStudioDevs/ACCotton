@@ -1,6 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1d2d3d"/>
-  <circle cx="32" cy="32" r="21" fill="none" stroke="#416180" stroke-width="2"
-          stroke-dasharray="3 9"/>
-  <circle cx="32" cy="32" r="11" fill="#94bce3"/>
+<!-- Brand mark, from the design hand-off (Waveform Mark.svg). The delivered
+     file carried a C2PA provenance block larger than the artwork itself; only
+     the path is kept here. Scaled to 0.75 and centred to give the bars room
+     to breathe inside the rounded square at favicon sizes. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#1d2d3d"/>
+  <g transform="translate(4 4) scale(0.75)" fill="#94bce3">
+    <path d="M0 10h4v12h-4zM6 2h4v28h-4zM12 6h4v20h-4zM22 8h4v16h-4zM28 12h4v8h-4z"/>
+  </g>
 </svg>
