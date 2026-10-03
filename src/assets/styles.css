@@ -44,7 +44,7 @@
      browser synthesises it, which is the look that was signed off. Barlow
      Condensed stays as the fallback — it is already loaded for nothing. */
   --font-heading: "WDXL Lubrifont JP N", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Space Grotesk", "Barlow", ui-sans-serif, system-ui, sans-serif;
 
   /* Density 0.85x */
   --space-1: 3.4px;

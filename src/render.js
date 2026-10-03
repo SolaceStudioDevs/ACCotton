@@ -461,7 +461,7 @@ export function page(key, peaks, assets) {
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/wdxllubrifontjpn-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/spacegrotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${assets.css}">${ld}
 <script>document.documentElement.dataset.js="on"</script>
 <script src="${assets.js}" type="module"></script>

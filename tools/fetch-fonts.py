@@ -20,8 +20,10 @@ import os, pathlib, re, subprocess
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/120.0 Safari/537.36")
 
-BARLOW = ("https://fonts.googleapis.com/css2?"
-          "family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600&display=swap")
+# Latin families, served with subset comments.
+LATIN = ("https://fonts.googleapis.com/css2?"
+         "family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600"
+         "&family=Space+Grotesk:wght@400;500;700&display=swap")
 WDXL = ("https://fonts.googleapis.com/css2?"
         "family=WDXL+Lubrifont+JP+N&display=swap")
 
@@ -36,14 +38,33 @@ def fetch(url):
 
 
 os.makedirs("public/fonts", exist_ok=True)
-out, seen = [], {}
+out, seen, weights_at = [], {}, {}
 
 
-def emit(block, subset):
+def parts(block):
     url = re.search(r"url\((https://fonts\.gstatic\.com/[^)]+)\)", block).group(1)
     fam = re.search(r"font-family: '([^']+)'", block).group(1).replace(" ", "")
     wt = re.search(r"font-weight: (\d+)", block).group(1)
-    name = f"{fam.lower()}-{wt}-{subset}.woff2"
+    return url, fam, wt
+
+
+def survey(blocks):
+    """Note which URLs are served for more than one weight.
+
+    Google ships variable families as a single file referenced by several
+    @font-face blocks, one per requested weight. Naming that file after
+    whichever weight happened to come first would be a lie, so those are
+    labelled "var" instead.
+    """
+    for block in blocks:
+        url, _, wt = parts(block)
+        weights_at.setdefault(url, set()).add(wt)
+
+
+def emit(block, subset):
+    url, fam, wt = parts(block)
+    tag = "var" if len(weights_at.get(url, {wt})) > 1 else wt
+    name = f"{fam.lower()}-{tag}-{subset}.woff2"
     if url not in seen:
         subprocess.run(["curl", "-sS", "-o", f"public/fonts/{name}", url], check=True)
         seen[url] = name
@@ -51,10 +72,13 @@ def emit(block, subset):
     out.append(block.replace(url, f"/fonts/{seen[url]}"))
 
 
-# --- Barlow: subset comments are present, match on them ---------------------
-for subset, block in re.findall(r"/\* (\S+) \*/\s*(@font-face \{.*?\})", fetch(BARLOW), re.S):
-    if subset in ("latin", "latin-ext"):
-        emit(block, subset)
+# --- Barlow + Space Grotesk: subset comments are present, match on them -----
+latin_blocks = [(s_, b) for s_, b in
+                re.findall(r"/\* (\S+) \*/\s*(@font-face \{.*?\})", fetch(LATIN), re.S)
+                if s_ in ("latin", "latin-ext")]
+survey([b for _, b in latin_blocks])
+for subset, block in latin_blocks:
+    emit(block, subset)
 
 # --- WDXL: no comments, so match on the unicode-range itself ----------------
 for block in re.findall(r"@font-face \{.*?\}", fetch(WDXL), re.S):
