@@ -65,7 +65,7 @@ function portrait(sizes, cls, alt, loading) {
 }
 
 export function hub() {
-  return `<div class="hub">
+  return `<main class="hub" id="main">
   <header class="hub__head">
     <h1 class="hub__name">${esc(C.site.wordmark)}</h1>
     <p class="hub__role">${esc(C.site.role)}</p>
@@ -85,7 +85,7 @@ export function hub() {
     </nav>
   </div>
   <p class="hub__tagline">${esc(C.site.tagline)}</p>
-</div>`;
+</main>`;
 }
 
 /* --- Section chrome -------------------------------------------------------- */
