@@ -275,6 +275,8 @@ export const contact = {
 export const footer = {
   copyright: "© {year} A.C. Cotton. All rights reserved.",
   note: "Cover art and game assets remain the property of their respective publishers.",
+  // Cross-link to the narration software, by the same maker.
+  also: { before: "Also by A.C. Cotton: ", label: "Narration Studio ’27", href: "https://narrationstudio.net/", after: ", audiobook recording software." },
 };
 
 /* --- Updates -------------------------------------------------------------

@@ -110,6 +110,7 @@ ${bodyHTML}
     ${footWave()}
     <p class="foot__copy">${esc(C.footer.copyright.replace("{year}", new Date().getFullYear()))}</p>
     <p class="foot__note">${esc(C.footer.note)}</p>
+    <p class="foot__note">${esc(C.footer.also.before)}<a class="foot__link" href="${esc(C.footer.also.href)}">${esc(C.footer.also.label)}</a>${esc(C.footer.also.after)}</p>
   </footer>
 </div>`;
 }
