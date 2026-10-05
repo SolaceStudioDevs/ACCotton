@@ -449,11 +449,15 @@ export function page(key, peaks, assets) {
 
   const canonical = C.site.origin + C.routes[key];
 
-  const ld = isHub ? `\n<script type="application/ld+json">${JSON.stringify({
-    "@context": "https://schema.org",
+  // Structured data. The hub describes the person; every other page is a
+  // page about that person, with a breadcrumb back to the hub. The reels page
+  // also lists each demo as an audio recording.
+  const personId = C.site.origin + "/#person";
+  const person = {
     "@type": "Person",
+    "@id": personId,
     name: C.site.name,
-    jobTitle: "Voice Actor & Narrator",
+    jobTitle: "Audiobook Narrator & Voice Actor",
     url: C.site.origin + "/",
     email: "mailto:" + C.site.email,
     image: C.site.origin + "/img/headshot-900.jpg",
@@ -463,7 +467,38 @@ export function page(key, peaks, assets) {
       url: "https://www.audiopub.org/",
     },
     sameAs: C.contact.links.filter((l) => l.external).map((l) => l.href),
-  })}</script>` : "";
+  };
+  const graph = isHub ? [person] : [
+    {
+      "@type": key === "about" ? "ProfilePage" : key === "contact" ? "ContactPage" : "WebPage",
+      "@id": canonical,
+      url: canonical,
+      name: m.title,
+      description: m.description,
+      about: { "@id": personId },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: C.site.name, item: C.site.origin + "/" },
+        { "@type": "ListItem", position: 2, name: m.title.split(" — ")[0], item: canonical },
+      ],
+    },
+    ...(key === "reels" ? C.reels.map((r) => ({
+      "@type": "AudioObject",
+      name: r.title + " — " + r.kicker,
+      description: r.blurb,
+      contentUrl: C.site.origin + "/media/" + r.file + ".mp3",
+      encodingFormat: "audio/mpeg",
+      genre: r.tag,
+      creator: { "@id": personId },
+    })) : []),
+  ];
+  const ld = `
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  }).replace(/</g, "\u003c")}</script>`;
 
   return `<!doctype html>
 <html lang="en">

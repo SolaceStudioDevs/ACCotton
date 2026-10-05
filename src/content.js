@@ -53,37 +53,37 @@ export const routes = {
    can be linked, shared and indexed. */
 export const meta = {
   hub: {
-    title: "A.C. Cotton — Voice Actor & Narrator",
+    title: "A.C. Cotton — Audiobook Narrator & Voice Actor",
     description:
       "A.C. Cotton, voice actor and narrator. Long-form audiobook narration, game and character VO, dialects. Five demo reels, rates, and direct booking.",
   },
   about: {
-    title: "About — A.C. Cotton",
+    title: "About A.C. Cotton — Audiobook Narrator & Voice Actor",
     description:
       "Character work, dialects and long-form narration from a quiet home studio. Shure MV7+, multiple takes, fast turnaround.",
   },
   reels: {
-    title: "Demo Reels — A.C. Cotton",
+    title: "Audiobook Narration Demo Reels — A.C. Cotton",
     description:
       "Five long-form narration samples: folklore and horror, literary prose, historical romance, and suspense. Listen in full.",
   },
   credits: {
-    title: "Credits — A.C. Cotton",
+    title: "Audiobook & Video Game Voice Credits — A.C. Cotton",
     description:
-      "Audiobook narration and video game voice credits. I Wasn't Me Until I Left Everything Behind and The Book of Wisdom are out now on Audible, with Loup-Garou and Knight's Path to follow.",
+      "Audiobook and video game voice credits. I Wasn't Me Until I Left Everything Behind and The Book of Wisdom are out now on Audible.",
   },
   rates: {
-    title: "Rates — A.C. Cotton",
+    title: "Audiobook Narration & Voiceover Rates — A.C. Cotton",
     description:
       "Audiobook narration from $150–$200 PFH, commercial voiceover, e-learning, game VO and character work. Custom projects quoted individually.",
   },
   contact: {
-    title: "Contact & Booking — A.C. Cotton",
+    title: "Book an Audiobook Narrator or Voice Actor — A.C. Cotton",
     description:
       "Book A.C. Cotton for audiobook, game, commercial or character voice work. Direct email, ACX and Voice123 profiles.",
   },
   updates: {
-    title: "Updates — A.C. Cotton",
+    title: "News & Releases — A.C. Cotton, Voice Actor",
     description:
       "New bookings, releases and studio news from voice actor and narrator A.C. Cotton.",
   },
