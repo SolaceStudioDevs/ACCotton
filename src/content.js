@@ -22,6 +22,8 @@ export const AUDIBLE_I_WASNT_ME =
   "https://www.audible.com/pd/I-Wasnt-Me-Until-I-Left-Everything-Behind-Audiobook/B0HKLHW6VZ";
 export const AUDIBLE_BOOK_OF_WISDOM =
   "https://www.audible.com/pd/B0HLQ62M3X";
+export const AUDIBLE_LOUP_GAROU =
+  "https://www.audible.com/pd/B0HMJTDZVS";
 export const AUDIBLE_NARRATOR =
   "https://www.audible.com/search?searchNarrator=A.C.+Cotton";
 
@@ -70,7 +72,7 @@ export const meta = {
   credits: {
     title: "Audiobook & Video Game Voice Credits — A.C. Cotton",
     description:
-      "Audiobook and video game voice credits. I Wasn't Me Until I Left Everything Behind and The Book of Wisdom are out now on Audible.",
+      "Audiobook and video game voice credits. Loup-Garou, The Book of Wisdom and I Wasn't Me Until I Left Everything Behind are out now on Audible.",
   },
   rates: {
     title: "Audiobook Narration & Voiceover Rates — A.C. Cotton",
@@ -126,7 +128,7 @@ export const about = {
   paragraphs: [
     "Grumpy tavern keeper. Small-town sheriff. The villain who is far too pleased with himself. The steady voice on the last thirty seconds of a car ad. I've been told my range is annoyingly wide, and I have decided to take that as a compliment.",
     "Most of the work is long-form: audiobooks, game NPCs, anything where one voice has to hold up over hours instead of seconds. I record at home in a room I have quietly obsessed over, and I send multiple takes every time, because the read in your head is rarely the first one out of my mouth.",
-    "Two of those are out in the world: Christin Niebanck's memoir, I Wasn't Me Until I Left Everything Behind, and Elias Thorne's The Book of Wisdom. Both are on Audible, nine days apart, and I have stopped pretending I do not check the listings every morning.",
+    "Three of those are out in the world now: Christin Niebanck's memoir, I Wasn't Me Until I Left Everything Behind, Elias Thorne's The Book of Wisdom, and Kevin Schumacher's Loup-Garou. All three are on Audible, and I have stopped pretending I do not check the listings every morning.",
   ],
   specs: [
     { label: "Microphone", value: "Shure MV7+",      sub: "USB-C / XLR hybrid dynamic" },
@@ -154,7 +156,7 @@ export const about = {
     },
   ],
   cta: { label: "Hear the reels →", to: "reels" },
-  listen: { label: "Both titles on Audible →", href: AUDIBLE_NARRATOR },
+  listen: { label: "All three on Audible →", href: AUDIBLE_NARRATOR },
 };
 
 /* --- Demo reels ----------------------------------------------------------
@@ -198,6 +200,12 @@ export const credits = {
       coverAlt: "Cover of The Book of Wisdom: The Hidden Order Behind All Things by Elias Thorne",
       meta: "Elias Thorne · Esoteric non-fiction", status: "Out now", live: true,
       summary: "Twenty chapters on the Hermetic principles and the patterns said to sit beneath them: sacred geometry, the Tree of Life, consciousness and vibration, with a meditation closing each one. Six and a half hours, read slow and deliberate." },
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou", em: true,
+      listen: AUDIBLE_LOUP_GAROU,
+      cover: "cover-loup-garou", coverH: 132,
+      coverAlt: "Cover art for Loup-Garou by Kevin Schumacher",
+      meta: "Kevin Schumacher · Folklore & horror", status: "Out now", live: true,
+      summary: "A man at a Maine lake camp starts waking with something in the room and his body refusing to move. The search for an explanation runs from brain scans to a skull turned up in his own ground to a root doctor on Daufuskie Island — twenty chapters of slow dread, first person, in the voice of someone working hard to stay reasonable about it." },
     { medium: "Video game", tone: "dark", role: "NPC voice actor — ", work: "Knight's Path", em: true,
       trailer: true,
       // Transparent logo rather than cover art, so it carries no card or shadow.
@@ -209,11 +217,6 @@ export const credits = {
       coverAlt: "Knight's Path logo",
       meta: "Character and dialect work · Medieval historical", status: "In production",
       summary: "A story-driven action RPG in a grounded low-fantasy world modelled on the Holy Roman Empire — villages, manors, ruined castles, and the city of Eranthold. Combat follows Historical European Martial Arts rather than arcade flourish: deliberate, weighty, every action intentional." },
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou", em: true,
-      cover: "cover-loup-garou", coverH: 132,
-      coverAlt: "Cover art for Loup-Garou by Kevin Schumacher",
-      meta: "Kevin Schumacher · Folklore & horror", status: "In production",
-      summary: "A man at a Maine lake camp starts waking with something in the room and his body refusing to move. The search for an explanation runs from brain scans to a skull turned up in his own ground to a root doctor on Daufuskie Island — twenty chapters of slow dread, first person, in the voice of someone working hard to stay reasonable about it." },
   ],
   footnote: "More credits added as new roles are booked.",
 };
@@ -287,7 +290,10 @@ export const updates = {
   heading: "Updates.",
   lede: "Short posts when a book wraps, a role is booked, or the studio changes.",
   posts: [
-    { tone: "dark", medium: "Audiobook", status: "Out now", date: "October 1, 2026",
+    { tone: "dark", medium: "Audiobook", status: "Out now", date: "October 9, 2026",
+      listen: AUDIBLE_LOUP_GAROU,
+      title: "<em>Loup-Garou</em> by Kevin Schumacher" },
+    { tone: "steel", medium: "Audiobook", status: "Out now", date: "October 1, 2026",
       listen: AUDIBLE_BOOK_OF_WISDOM,
       title: "<em>The Book of Wisdom</em> by Elias Thorne" },
     { tone: "steel", medium: "Audiobook", status: "Out now", date: "September 30, 2026",

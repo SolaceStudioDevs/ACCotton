@@ -518,7 +518,7 @@ export function page(key, peaks, assets) {
 <meta property="og:image" content="${esc(C.site.origin)}/img/og-card.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A.C. Cotton, Voice Actor and Narrator — two titles out now on Audible">
+<meta property="og:image:alt" content="A.C. Cotton, Voice Actor and Narrator — three titles out now on Audible">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1d2d3d">
 
