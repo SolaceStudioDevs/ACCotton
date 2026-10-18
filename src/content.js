@@ -72,7 +72,7 @@ export const meta = {
   credits: {
     title: "Audiobook & Video Game Voice Credits — A.C. Cotton",
     description:
-      "Audiobook and video game voice credits. Loup-Garou, The Book of Wisdom and I Wasn't Me Until I Left Everything Behind are out now on Audible.",
+      "Audiobook and video game voice credits. Loup-Garou, The Book of Wisdom and I Wasn't Me Until I Left Everything Behind are out now on Audible, with Jeremy Clowers' Shadows of Ascension series in production.",
   },
   rates: {
     title: "Audiobook Narration & Voiceover Rates — A.C. Cotton",
@@ -183,29 +183,38 @@ export const reelsIntro = {
 
 export const TRAILER_URL = "https://youtu.be/qj51LFfawi0?si=ncYceXSEMIHoBTKV";
 
-/* Ordered by how far along each title is: released first, then what is still
-   being recorded. */
+/* Newest first, matching the updates feed: the most recent booking or
+   release leads. */
 export const credits = {
   heading: "On the record.",
   items: [
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "I Wasn't Me Until I Left Everything Behind", em: true,
-      listen: AUDIBLE_I_WASNT_ME,
-      cover: "cover-i-wasnt-me", coverH: 120,
-      coverAlt: "Cover of I Wasn't Me Until I Left Everything Behind by Christin Niebanck",
-      meta: "Christin Niebanck · Memoir", status: "Out now", live: true,
-      summary: "A memoir about leaving a settled life behind — the expectations, the roles, the safety of it — and finding that starting over had less to do with becoming someone new than with getting back to who she was before everyone told her." },
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "The Book of Wisdom: The Hidden Order Behind All Things", em: true,
-      listen: AUDIBLE_BOOK_OF_WISDOM,
-      cover: "cover-book-of-wisdom", coverH: 120,
-      coverAlt: "Cover of The Book of Wisdom: The Hidden Order Behind All Things by Elias Thorne",
-      meta: "Elias Thorne · Esoteric non-fiction", status: "Out now", live: true,
-      summary: "Twenty chapters on the Hermetic principles and the patterns said to sit beneath them: sacred geometry, the Tree of Life, consciousness and vibration, with a meditation closing each one. Six and a half hours, read slow and deliberate." },
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Shadows of Ascension", em: true,
+      // Points at the book on Amazon; swap for the Audible listing once the
+      // audiobook is out.
+      cover: "cover-shadows-of-ascension", coverW: 102, coverH: 164,
+      coverHref: "https://www.amazon.com/dp/B0HM22D929",
+      coverAlt: "Cover art for Shadows of Ascension by Jeremy Clowers",
+      meta: "Jeremy Clowers · Science fiction · Four-book series",
+      status: "In production",
+      summary: "Earth in 2282, a century after an alien people took refuge here and stayed. It follows the Crossborn — children of both species, and unsettling to both — through corporate Old Chicago and a conspiracy around a deep-space relay reaching further than anyone has tried before." },
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou", em: true,
       listen: AUDIBLE_LOUP_GAROU,
       cover: "cover-loup-garou", coverH: 132,
       coverAlt: "Cover art for Loup-Garou by Kevin Schumacher",
       meta: "Kevin Schumacher · Folklore & horror", status: "Out now", live: true,
       summary: "A man at a Maine lake camp starts waking with something in the room and his body refusing to move. The search for an explanation runs from brain scans to a skull turned up in his own ground to a root doctor on Daufuskie Island — twenty chapters of slow dread, first person, in the voice of someone working hard to stay reasonable about it." },
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "The Book of Wisdom: The Hidden Order Behind All Things", em: true,
+      listen: AUDIBLE_BOOK_OF_WISDOM,
+      cover: "cover-book-of-wisdom", coverH: 120,
+      coverAlt: "Cover of The Book of Wisdom: The Hidden Order Behind All Things by Elias Thorne",
+      meta: "Elias Thorne · Esoteric non-fiction", status: "Out now", live: true,
+      summary: "Twenty chapters on the Hermetic principles and the patterns said to sit beneath them: sacred geometry, the Tree of Life, consciousness and vibration, with a meditation closing each one. Six and a half hours, read slow and deliberate." },
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "I Wasn't Me Until I Left Everything Behind", em: true,
+      listen: AUDIBLE_I_WASNT_ME,
+      cover: "cover-i-wasnt-me", coverH: 120,
+      coverAlt: "Cover of I Wasn't Me Until I Left Everything Behind by Christin Niebanck",
+      meta: "Christin Niebanck · Memoir", status: "Out now", live: true,
+      summary: "A memoir about leaving a settled life behind — the expectations, the roles, the safety of it — and finding that starting over had less to do with becoming someone new than with getting back to who she was before everyone told her." },
     { medium: "Video game", tone: "dark", role: "NPC voice actor — ", work: "Knight's Path", em: true,
       trailer: true,
       // Transparent logo rather than cover art, so it carries no card or shadow.
@@ -217,15 +226,6 @@ export const credits = {
       coverAlt: "Knight's Path logo",
       meta: "Character and dialect work · Medieval historical", status: "In production",
       summary: "A story-driven action RPG in a grounded low-fantasy world modelled on the Holy Roman Empire — villages, manors, ruined castles, and the city of Eranthold. Combat follows Historical European Martial Arts rather than arcade flourish: deliberate, weighty, every action intentional." },
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Shadows of Ascension", em: true,
-      // Points at the book on Amazon; swap for the Audible listing once the
-      // audiobook is out.
-      cover: "cover-shadows-of-ascension", coverW: 102, coverH: 164,
-      coverHref: "https://www.amazon.com/dp/B0HM22D929",
-      coverAlt: "Cover art for Shadows of Ascension by Jeremy Clowers",
-      meta: "Jeremy Clowers · Science fiction · Book one",
-      status: "In production",
-      summary: "Earth in 2282, a century after an alien people took refuge here and stayed. It follows the Crossborn — children of both species, and unsettling to both — through corporate Old Chicago and a conspiracy around a deep-space relay reaching further than anyone has tried before." },
   ],
   footnote: "More credits added as new roles are booked.",
 };
