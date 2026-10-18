@@ -217,6 +217,15 @@ export const credits = {
       coverAlt: "Knight's Path logo",
       meta: "Character and dialect work · Medieval historical", status: "In production",
       summary: "A story-driven action RPG in a grounded low-fantasy world modelled on the Holy Roman Empire — villages, manors, ruined castles, and the city of Eranthold. Combat follows Historical European Martial Arts rather than arcade flourish: deliberate, weighty, every action intentional." },
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Shadows of Ascension", em: true,
+      // Points at the book on Amazon; swap for the Audible listing once the
+      // audiobook is out.
+      cover: "cover-shadows-of-ascension", coverW: 102, coverH: 164,
+      coverHref: "https://www.amazon.com/dp/B0HM22D929",
+      coverAlt: "Cover art for Shadows of Ascension by Jeremy Clowers",
+      meta: "Jeremy Clowers · Science fiction · Book one",
+      status: "In production",
+      summary: "Earth in 2282, a century after an alien people took refuge here and stayed. It follows the Crossborn — children of both species, and unsettling to both — through corporate Old Chicago and a conspiracy around a deep-space relay reaching further than anyone has tried before." },
   ],
   footnote: "More credits added as new roles are booked.",
 };

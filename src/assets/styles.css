@@ -691,7 +691,12 @@ a { color: inherit; }
 }
 .credit__cover {
   display: block;
-  width: 120px;
+  /* A fixed width, narrowed per cover where the art is tall, so a paperback
+     does not tower over the square audiobook covers beside it. Width must be
+     an explicit length rather than a max: these load lazily, and an auto
+     width leaves them 0x0 until they arrive, which is the layout shift the
+     width/height attributes exist to prevent. */
+  width: var(--cover-w, 120px);
   height: auto;
   border-radius: 8px;
   box-shadow: var(--shadow-md);

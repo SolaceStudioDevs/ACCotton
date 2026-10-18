@@ -237,7 +237,8 @@ function credits() {
       ? `<picture>` +
         `<source srcset="/img/${c.cover}-240.webp" type="image/webp">` +
         `<img class="${coverCls}" src="/img/${c.cover}-240.${c.coverExt || "jpg"}" alt="${esc(c.coverAlt)}"` +
-        ` width="120" height="${c.coverH || 120}" loading="lazy" decoding="async">` +
+        (c.coverW ? ` style="--cover-w:${c.coverW}px"` : "") +
+        ` width="${c.coverW || 120}" height="${c.coverH || 120}" loading="lazy" decoding="async">` +
         `</picture>`
       : "";
     // Where the cover leads: its own URL if it has one, otherwise wherever the
