@@ -299,7 +299,10 @@ export const updates = {
   heading: "Updates.",
   lede: "Short posts when a book wraps, a role is booked, or the studio changes.",
   posts: [
-    { tone: "dark", medium: "Audiobook", status: "Out now", date: "October 9, 2026",
+    { tone: "dark", medium: "Audiobook", status: "In production", date: "October 18, 2026",
+      title: "Narrating <em>Shadows of Ascension</em>",
+      body: "Jeremy Clowers' science fiction — the year 2282, humans and the Valari sharing an Earth that neither of them recognises any more. It is the first series I have signed for, and the first time I get to work out what something not quite human sounds like." },
+    { tone: "steel", medium: "Audiobook", status: "Out now", date: "October 9, 2026",
       listen: AUDIBLE_LOUP_GAROU,
       title: "<em>Loup-Garou</em> by Kevin Schumacher" },
     { tone: "steel", medium: "Audiobook", status: "Out now", date: "October 1, 2026",
