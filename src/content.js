@@ -18,8 +18,6 @@ export const site = {
    parameters Audible hands out are per-visit and would rot, so they are
    stripped. AUDIBLE_NARRATOR is the listing of everything narrated under this
    name, which is the right link when pointing at the work as a whole. */
-export const AUDIBLE_I_WASNT_ME =
-  "https://www.audible.com/pd/I-Wasnt-Me-Until-I-Left-Everything-Behind-Audiobook/B0HKLHW6VZ";
 export const AUDIBLE_BOOK_OF_WISDOM =
   "https://www.audible.com/pd/B0HLQ62M3X";
 export const AUDIBLE_LOUP_GAROU =
@@ -72,7 +70,7 @@ export const meta = {
   credits: {
     title: "Audiobook & Video Game Voice Credits — A.C. Cotton",
     description:
-      "Audiobook and video game voice credits. Loup-Garou, The Book of Wisdom and I Wasn't Me Until I Left Everything Behind are out now on Audible, with Jeremy Clowers' Shadows of Ascension series in production.",
+      "Audiobook and video game voice credits. Loup-Garou and The Book of Wisdom are out now on Audible, with Jeremy Clowers' Shadows of Ascension series in production.",
   },
   rates: {
     title: "Audiobook Narration & Voiceover Rates — A.C. Cotton",
@@ -128,7 +126,7 @@ export const about = {
   paragraphs: [
     "Grumpy tavern keeper. Small-town sheriff. The villain who is far too pleased with himself. The steady voice on the last thirty seconds of a car ad. I've been told my range is annoyingly wide, and I have decided to take that as a compliment.",
     "Most of the work is long-form: audiobooks, game NPCs, anything where one voice has to hold up over hours instead of seconds. I record at home in a room I have quietly obsessed over, and I send multiple takes every time, because the read in your head is rarely the first one out of my mouth.",
-    "Three of those are out in the world now: Christin Niebanck's memoir, I Wasn't Me Until I Left Everything Behind, Elias Thorne's The Book of Wisdom, and Kevin Schumacher's Loup-Garou. All three are on Audible, and I have stopped pretending I do not check the listings every morning.",
+    "Two of those are out in the world now: Elias Thorne's The Book of Wisdom and Kevin Schumacher's Loup-Garou. Both are on Audible, and I have stopped pretending I do not check the listings every morning.",
   ],
   specs: [
     { label: "Microphone", value: "Shure MV7+",      sub: "USB-C / XLR hybrid dynamic" },
@@ -156,7 +154,7 @@ export const about = {
     },
   ],
   cta: { label: "Hear the reels →", to: "reels" },
-  listen: { label: "All three on Audible →", href: AUDIBLE_NARRATOR },
+  listen: { label: "Both titles on Audible →", href: AUDIBLE_NARRATOR },
 };
 
 /* --- Demo reels ----------------------------------------------------------
@@ -209,12 +207,6 @@ export const credits = {
       coverAlt: "Cover of The Book of Wisdom: The Hidden Order Behind All Things by Elias Thorne",
       meta: "Elias Thorne · Esoteric non-fiction", status: "Out now", live: true,
       summary: "Twenty chapters on the Hermetic principles and the patterns said to sit beneath them: sacred geometry, the Tree of Life, consciousness and vibration, with a meditation closing each one. Six and a half hours, read slow and deliberate." },
-    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "I Wasn't Me Until I Left Everything Behind", em: true,
-      listen: AUDIBLE_I_WASNT_ME,
-      cover: "cover-i-wasnt-me", coverH: 120,
-      coverAlt: "Cover of I Wasn't Me Until I Left Everything Behind by Christin Niebanck",
-      meta: "Christin Niebanck · Memoir", status: "Out now", live: true,
-      summary: "A memoir about leaving a settled life behind — the expectations, the roles, the safety of it — and finding that starting over had less to do with becoming someone new than with getting back to who she was before everyone told her." },
     { medium: "Video game", tone: "dark", role: "NPC voice actor — ", work: "Knight's Path", em: true,
       trailer: true,
       // Transparent logo rather than cover art, so it carries no card or shadow.
@@ -308,15 +300,9 @@ export const updates = {
     { tone: "steel", medium: "Audiobook", status: "Out now", date: "October 1, 2026",
       listen: AUDIBLE_BOOK_OF_WISDOM,
       title: "<em>The Book of Wisdom</em> by Elias Thorne" },
-    { tone: "steel", medium: "Audiobook", status: "Out now", date: "September 30, 2026",
-      listen: AUDIBLE_I_WASNT_ME,
-      title: "<em>I Wasn't Me Until I Left Everything Behind</em> by Christin Niebanck" },
     { tone: "steel", medium: "Audiobook", status: "In production", date: "August 18, 2026",
       title: "Narrating <em>Loup-Garou</em>",
       body: "Kevin Schumacher's werewolf folklore, full length. It is the longest stretch of sustained atmosphere I have recorded and easily the most fun to sit inside." },
-    { tone: "steel", medium: "Audiobook", status: "In production", date: "August 16, 2026",
-      title: "Narrating <em>I Wasn't Me Until I Left Everything Behind</em>",
-      body: "Christin Niebanck's memoir. Reading someone's own life back to them needs a lighter touch than fiction, and it has been a good reminder to stay out of the way of the story." },
     { tone: "steel", medium: "Audiobook", status: "In production", date: "August 13, 2026",
       title: "Narrating <em>The Book of Wisdom</em>",
       body: "Elias Thorne's esoteric non-fiction on Hermetic principles. A completely different gear from the folklore: slow, deliberate, and entirely unbothered by the clock." },

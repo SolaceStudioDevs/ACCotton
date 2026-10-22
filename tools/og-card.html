@@ -1,0 +1,87 @@
+<!doctype html>
+<!-- Source for public/img/og-card.jpg, the 1200x630 link-preview card.
+
+     Not part of the build. To regenerate: copy this into dist/ while the dev
+     server is running (the build clears dist/, so copy it after), open it at
+     1200x630, screenshot, and save the result over public/img/og-card.jpg.
+
+     It lives here rather than in a scratch folder because the card has needed
+     rebuilding every time the headshot, the fonts or the credits changed, and
+     each time it had been lost. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>share card</title>
+<style>
+  /* The site's own faces, served locally — no Google request, and no risk of
+     the card rendering in a fallback. */
+  @font-face { font-family:'Space Grotesk'; font-weight:400; src:url(/fonts/spacegrotesk-var-latin.woff2) format('woff2'); }
+  @font-face { font-family:'Space Grotesk'; font-weight:700; src:url(/fonts/spacegrotesk-var-latin.woff2) format('woff2'); }
+  @font-face { font-family:'WDXL Lubrifont JP N'; font-weight:400; src:url(/fonts/wdxllubrifontjpn-400-latin.woff2) format('woff2'); }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1200px; height:630px; overflow:hidden; }
+  body {
+    background:
+      radial-gradient(900px 620px at 22% 42%, #2c455d 0%, #1d2d3d 55%, #16222e 100%);
+    color:#eef6ff;
+    font-family:'Space Grotesk', sans-serif;
+    display:flex; align-items:center; gap:62px;
+    padding:0 78px;
+  }
+
+  .shot {
+    width:316px; height:316px; flex:0 0 316px;
+    border-radius:50%;
+    overflow:hidden;
+    border:5px solid rgba(181,217,253,.22);
+    box-shadow:0 26px 60px rgba(0,0,0,.45);
+  }
+  .shot img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  .name {
+    /* WDXL runs much wider than a condensed face; this is sized to its width,
+       not to the old setting. */
+    font-family:'WDXL Lubrifont JP N', sans-serif; font-weight:600;
+    font-size:96px; line-height:.96; letter-spacing:.004em;
+    color:#fff;
+  }
+  .role {
+    margin-top:18px;
+    font-weight:500; font-size:25px; letter-spacing:.26em; text-transform:uppercase;
+    color:#94bce3;
+  }
+  .rule { margin:30px 0 26px; height:2px; width:118px; background:#416180; }
+
+  .books { display:flex; align-items:center; gap:18px; }
+  .books img {
+    width:104px; height:104px; border-radius:9px; display:block;
+    /* Covers are not all square — Loup-Garou is taller than it is wide — so
+       crop to the box rather than squashing the artwork into it. */
+    object-fit:cover;
+    box-shadow:0 10px 24px rgba(0,0,0,.42);
+  }
+  .books p { font-size:24px; line-height:1.35; color:#d6ebff; max-width:330px; }
+  .books b { color:#fff; font-weight:700; }
+
+  .site {
+    position:absolute; right:78px; bottom:52px;
+    font-size:22px; letter-spacing:.18em; text-transform:uppercase; color:#749dc4;
+  }
+</style>
+</head>
+<body>
+  <div class="shot"><img src="/img/headshot-900.jpg" alt=""></div>
+  <div>
+    <div class="name">A.C. COTTON</div>
+    <div class="role">Voice Actor &amp; Narrator</div>
+    <div class="rule"></div>
+    <div class="books">
+      <img src="/img/cover-loup-garou-240.jpg" alt="">
+      <img src="/img/cover-book-of-wisdom-240.jpg" alt="">
+      <p><b>Two titles out now</b><br>on Audible</p>
+    </div>
+  </div>
+  <div class="site">accotton.com</div>
+</body>
+</html>
