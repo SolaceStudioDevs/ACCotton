@@ -140,6 +140,8 @@ rule(gap_above=12, gap_below=14)
 
 # ---------- credits ----------
 heading("Audiobook narration")
+entry("Loup-Garou 2", "— Kevin Schumacher",
+      "Folklore horror · sequel to Loup-Garou · booked, in pre-production")
 entry("Loup-Garou", "— Kevin Schumacher",
       "Folklore horror · 9 hrs 57 mins · released October 2026 · Audible")
 entry("The Book of Wisdom: The Hidden Order Behind All Things", "— Elias Thorne",

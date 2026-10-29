@@ -186,6 +186,13 @@ export const TRAILER_URL = "https://youtu.be/qj51LFfawi0?si=ncYceXSEMIHoBTKV";
 export const credits = {
   heading: "On the record.",
   items: [
+    { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Loup-Garou 2", em: true,
+      // The shared "cover TBA" plate until Kevin has artwork, and no coverHref
+      // with it — there is nothing to link to yet, so the cover stays inert.
+      cover: "cover-tba", coverH: 120,
+      coverAlt: "Cover art for Loup-Garou 2 has not been announced yet",
+      meta: "Kevin Schumacher · More info coming soon!",
+      status: "TBA" },
     { medium: "Audiobook", tone: "steel", role: "Narrator — ", work: "Shadows of Ascension", em: true,
       // Points at the book on Amazon; swap for the Audible listing once the
       // audiobook is out.
